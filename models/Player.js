@@ -15,11 +15,16 @@ Player.init(
       type: DataTypes.STRING,
       allowNull: false
     },
+    nickname: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
     email: {},
+    password: {},
     victories: {},
     defeats: {},
-    league_level: {},
     total_points: {},
+    league_level: {}
   },
   {
     sequelize,
