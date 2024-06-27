@@ -5,7 +5,7 @@ class Match extends Model {}
 
 Match.init(
   {
-    id: {
+    match_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
@@ -25,27 +25,43 @@ Match.init(
       type: DataTypes.TIME,
       allowNull: false
     },
+    player_1_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'player',
+        key: 'player_id',
+      }
+    },
+    player_2_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'player',
+        key: 'player_id',
+      }
+    },
     winner_id: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'player',
+        key: 'player_id',
+      }
     },
-    looser_id: {
+    player_1_points: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    winner_points: {
+    player_2_points: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    looser_points: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    winner_league_snapshot: {
+    player_1_league_snapshot: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    looser_league_snapshot: {
+    player_2_league_snapshot: {
       type: DataTypes.STRING,
       allowNull: false
     }
