@@ -19,12 +19,40 @@ Player.init(
         type: DataTypes.STRING,
         allowNull: false
       },
-    email: {},
-    password: {},
-    victories: {},
-    defeats: {},
-    total_points: {},
-    league_level: {}
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [6],
+      }
+    },
+    victories: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
+    defeats: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
+    total_points: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0
+    },
+    league_level: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   },
   {
     sequelize,
