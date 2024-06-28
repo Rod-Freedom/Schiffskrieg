@@ -28,12 +28,15 @@ Shot.init(
       }
     },
     target_x: {
-      type: DataTypes.TIME,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
-    target_x: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+    target_y: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          len: [1],
+        }
     },
     result: {
         type: DataTypes.STRING,
