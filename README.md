@@ -1,2 +1,2 @@
 # Schiffskrieg
-SPLOOSH them to the deeps!
+KAPEEWM them to the depths!
