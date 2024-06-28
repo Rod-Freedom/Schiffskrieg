@@ -1,0 +1,23 @@
+[
+    {
+      "name": "nelson",
+      "nickname": "Horatio Nelson",
+      "email": "nelson@hotmail.com",
+      "password": "123456",
+      "victories": 55,
+      "defeats": 5,
+      "total_points": 1500,
+      "league_level": "Diamond"
+    },
+    {
+      "name": "nimitz",
+      "nickname": "Chester W. Nimitz",
+      "email": "nimitz@gmail.com",
+      "password": "123456",
+      "victories": 45,
+      "defeats": 15,
+      "total_points": 900,
+      "league_level": "Gold"
+    }
+]
+  
