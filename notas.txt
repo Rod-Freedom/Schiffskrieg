@@ -1,0 +1,23 @@
+- match
+    – id
+    – date
+    – turns
+    – duration
+    – Player 1
+        – id
+        – league snapshot
+        – points snapshot
+    – Player 2
+        – id
+        – league snapshot
+        – points snapshot
+    – winner
+        - id
+
+– Shot
+    – match id
+    – id ( num, match id )
+    – shooter id
+    – coordenate X
+    – coordenate Y
+    – result
