@@ -1,0 +1,850 @@
+#shipyard {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: calc(1 * var(--res-val));
+}
+
+.ship-div {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: calc(.5 * var(--res-val));
+    margin: calc(1 * var(--res-val));
+    width: calc(7.6 * var(--res-val));
+}
+
+.slot {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(72 * var(--res-val));
+    width: calc(9.5 * var(--res-val));
+}
+
+#dreadnought-div {
+    height: calc(36 * var(--res-val));
+}
+
+#dreadnought {
+    position: relative;
+    background-color: var(--ship-color-dark);
+    height: calc(10 * var(--res-val));
+    width: calc(.4 * var(--res-val));
+    box-shadow:
+        /* Ship's hull */
+        /* **Each blank row divides the element by columns. */
+        0 calc(-.5 * var(--res-val)) var(--ship-color-light),
+        calc(.4 * var(--res-val)) calc(.6 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) 0 var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(.6 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) 0 var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(1.8 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(.6 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(1.8 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(.6 * var(--res-val)) var(--ship-color-light),
+
+        calc(1.2 * var(--res-val)) calc(2.6 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(1.8 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(2.6 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(1.8 * var(--res-val)) var(--ship-color-light),
+
+        calc(1.6 * var(--res-val)) calc(4.2 * var(--res-val)) var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(2.6 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(4.2 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(2.6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) calc(6.2 * var(--res-val)) var(--ship-color-dark),
+        calc(2 * var(--res-val)) calc(4.2 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(6.2 * var(--res-val)) var(--ship-color-dark),
+        calc(-2 * var(--res-val)) calc(4.2 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.4 * var(--res-val)) calc(9.2 * var(--res-val)) var(--ship-color-dark),
+        calc(2.4 * var(--res-val)) calc(6.2 * var(--res-val)) var(--ship-color-light),
+        calc(-2.4 * var(--res-val)) calc(9.2 * var(--res-val)) var(--ship-color-dark),
+        calc(-2.4 * var(--res-val)) calc(6.2 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.8 * var(--res-val)) calc(13.2 * var(--res-val)) var(--ship-color-dark),
+        calc(2.8 * var(--res-val)) calc(9.2 * var(--res-val)) var(--ship-color-light),
+        calc(-2.8 * var(--res-val)) calc(13.2 * var(--res-val)) var(--ship-color-dark),
+        calc(-2.8 * var(--res-val)) calc(9.2 * var(--res-val)) var(--ship-color-light),
+        
+        calc(3.2 * var(--res-val)) calc(14.2 * var(--res-val)) var(--ship-color-dark),
+        calc(3.2 * var(--res-val)) calc(13.2 * var(--res-val)) var(--ship-color-light),
+        calc(3.2 * var(--res-val)) calc(20 * var(--res-val)) var(--ship-color-light),
+        calc(-3.2 * var(--res-val)) calc(14.2 * var(--res-val)) var(--ship-color-dark),
+        calc(-3.2 * var(--res-val)) calc(13.2 * var(--res-val)) var(--ship-color-light),
+        calc(-3.2 * var(--res-val)) calc(20 * var(--res-val)) var(--ship-color-light),
+        
+        calc(3.6 * var(--res-val)) calc(14.2 * var(--res-val)) var(--ship-color-light),
+        calc(-3.6 * var(--res-val)) calc(14.2 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.8 * var(--res-val)) calc(20 * var(--res-val)) var(--ship-color-dark),
+        calc(2.8 * var(--res-val)) calc(23 * var(--res-val)) var(--ship-color-light),
+        calc(-2.8 * var(--res-val)) calc(20 * var(--res-val)) var(--ship-color-dark),
+        calc(-2.8 * var(--res-val)) calc(23 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.4 * var(--res-val)) calc(23 * var(--res-val)) var(--ship-color-dark),
+        calc(2.4 * var(--res-val)) calc(24 * var(--res-val)) var(--ship-color-light),
+        calc(-2.4 * var(--res-val)) calc(23 * var(--res-val)) var(--ship-color-dark),
+        calc(-2.4 * var(--res-val)) calc(24 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) calc(24 * var(--res-val)) var(--ship-color-dark),
+        calc(2 * var(--res-val)) calc(24.5 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(24 * var(--res-val)) var(--ship-color-dark),
+        calc(-2 * var(--res-val)) calc(24.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(24.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(25 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(24.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(25 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(25 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(25.5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(25 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(25.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(25 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(25.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(25 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(25.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(25 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(25.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(25 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(25.5 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(25 * var(--res-val)) var(--ship-color-dark),
+        0 calc(25.5 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(9 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-dark),
+        calc(2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-dark),
+        calc(-2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-dark),
+        
+        0 calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(2 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(2.4 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(-2 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark),
+        calc(-2.4 * var(--res-val)) calc(16 * var(--res-val)) var(--ship-color-dark)
+    ;
+}
+
+#dreadnought::after {
+    position: absolute;
+    content: '';
+    background-color: var(--ship-color-dark);
+    height: calc(2 * var(--res-val));
+    width: calc(.4 * var(--res-val));
+    top: calc(10 * var(--res-val));
+    box-shadow:
+        /* Armored Gun House */
+        0 calc(-.5 * var(--res-val)) var(--ship-color-light),
+        calc(.4 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) 0 var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) 0 var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(.5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(.5 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(1 * var(--res-val)) var(--ship-color-dark),
+        0 calc(1.5 * var(--res-val)) var(--ship-color-light),
+        calc(.4 * var(--res-val)) calc(1 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(1 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(1 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(1 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(1 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(1 * var(--res-val)) var(--ship-color-light),
+
+        /* Cannons */
+        0 calc(-4 * var(--res-val)) var(--ship-color-light),
+        0 calc(-2 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(-2.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(-3 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(-2.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(-3 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(-2.5 * var(--res-val)) var(--ship-color-light),
+        calc(.8 * var(--res-val)) calc(-3 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(-2.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(-3 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(-3.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(-4 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(-3.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(-4 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(-3.5 * var(--res-val)) var(--ship-color-light),
+        calc(.8 * var(--res-val)) calc(-4 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(-3.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(-4 * var(--res-val)) var(--ship-color-light),
+        
+        /* Bridge */
+        0 calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        0 calc(5 * var(--res-val)) var(--ship-color-light),
+
+        calc(.4 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+
+        calc(.8 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(2 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-2 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.4 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(2.4 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        calc(-2.4 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-2.4 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.8 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-light),
+        calc(-2.8 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-light),
+
+        calc(2.4 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(2.4 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        calc(-2.4 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-2.4 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(2 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-2 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+
+        calc(1.6 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(5.5 * var(--res-val)) var(--ship-color-dark),
+        0 calc(6 * var(--res-val)) var(--ship-color-light),
+        
+        /* Exhaust */
+        0 calc(10.5 * var(--res-val)) var(--ship-color-light),
+
+        0 calc(10 * var(--res-val)) var(--ship-color-dark),
+        0 calc(9.5 * var(--res-val)) var(--ship-color-light),
+
+        calc(.4 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(11 * var(--res-val)) var(--ship-color-dark),
+        0 calc(11.5 * var(--res-val)) var(--ship-color-light),
+
+        /* Back cannons */
+        0 calc(18 * var(--res-val)) var(--ship-color-dark),
+        0 calc(18.5 * var(--res-val)) var(--ship-color-light),
+
+        calc(.4 * var(--res-val)) calc(18 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(18.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(18 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(18.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(18 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(18.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(18 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(18.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(18 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(18 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(17.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(17.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(17.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(17.5 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(17.5 * var(--res-val)) var(--ship-color-light),
+
+        calc(.4 * var(--res-val)) calc(20 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(20 * var(--res-val)) var(--ship-color-light),
+        calc(.4 * var(--res-val)) calc(21 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(21 * var(--res-val)) var(--ship-color-light)
+    ;
+}
+
+#dreadnought::before {
+    position: absolute;
+    content: '';
+    background-color: var(--ship-color-dark);
+    height: calc(7 * var(--res-val));
+    width: calc(.4 * var(--res-val));
+    top: calc(10 * var(--res-val));
+    box-shadow:
+        /* Fore superstructure */
+        /* First deck */
+        0 calc(7.5 * var(--res-val)) var(--ship-color-dark),
+        0 calc(8 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(7.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(8 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(7.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(8 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(7.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(8 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(7.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(8 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(7.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(8 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(7.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(8 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(7.5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(7.5 * var(--res-val)) var(--ship-color-light),
+
+        /* Second deck */
+        0 calc(8.5 * var(--res-val)) var(--ship-color-dark),
+        0 calc(9 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-dark),
+        calc(2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.4 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-light),
+        calc(-2.4 * var(--res-val)) calc(8.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) calc(7.5 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(7.5 * var(--res-val)) var(--ship-color-light)
+    ;
+}
+
+#uboat-div {
+    height: calc(18 * var(--res-val));
+}
+
+#uboat {
+    position: relative;
+    background-color: var(--ship-color-dark);
+    height: calc(10 * var(--res-val));
+    width: calc(.4 * var(--res-val));
+    box-shadow:
+        /* Uboat's hull */
+        /* **Each blank row divides the element by columns. */
+        0 calc(-.5 * var(--res-val)) var(--ship-color-light),
+
+        calc(.4 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(.15 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(-.35 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(.15 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(-.35 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) 0 var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) 0 var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(.5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(3.5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(3.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(3.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(3.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(6.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(6.5 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(6.5 * var(--res-val)) var(--ship-color-dark),
+        0 calc(7.5 * var(--res-val)) var(--ship-color-light)
+    ;
+}
+
+#uboat::after {
+    position: absolute;
+    content: '';
+    background-color: var(--ship-color-light);
+    height: calc(2 * var(--res-val));
+    width: calc(.4 * var(--res-val));
+    top: calc(5 * var(--res-val));
+    box-shadow:
+        /* Top Deck */
+        0 calc(-.5 * var(--res-val)) var(--ship-color-dark),
+        0 calc(-1 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(-1 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(-1 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+
+        calc(.8 * var(--res-val)) calc(1 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(1 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(2.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(2.5 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(4 * var(--res-val)) var(--ship-color-light),
+        
+        /* Back middle fin */
+        0 calc(8.5 * var(--res-val)) var(--ship-color-light)
+    ;
+}
+
+#uboat::before {
+    position: absolute;
+    content: '';
+    background-color: var(--ship-color-light);
+    height: calc(.5 * var(--res-val));
+    width: calc(.4 * var(--res-val));
+    top: calc(3 * var(--res-val));
+    box-shadow:
+        /* Front stripe */
+        calc(2.4 * var(--res-val)) calc(-1 * var(--res-val)) var(--ship-color-light),
+        calc(-2.4 * var(--res-val)) calc(-1 * var(--res-val)) var(--ship-color-light),
+        calc(1.6 * var(--res-val)) calc(-1 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(-1 * var(--res-val)) var(--ship-color-light),
+
+        /* Front stripe */
+        calc(.4 * var(--res-val)) 0 var(--ship-color-light),
+        calc(-.4 * var(--res-val)) 0 var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) 0 var(--ship-color-light),
+        calc(-.8 * var(--res-val)) 0 var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) 0 var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) 0 var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) 0 var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) 0 var(--ship-color-light),
+        
+        /* Side back fins */
+        calc(1.6 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-light),
+        calc(1.6 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-dark),
+        
+        calc(1.2 * var(--res-val)) calc(12 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(12 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(12 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(12 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        calc(2 * var(--res-val)) calc(12 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(12 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(14 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(14 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(14 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(14 * var(--res-val)) var(--ship-color-light)
+    ;
+}
+
+#destroyer-div {
+    height: calc(27 * var(--res-val));
+}
+
+#destroyer {
+    position: relative;
+    background-color: var(--ship-color-dark);
+    height: calc(15 * var(--res-val));
+    width: calc(.4 * var(--res-val));
+    box-shadow:
+        /* Ship's hull */
+        /* **Each blank row divides the element by columns. */
+        0 calc(-.5 * var(--res-val)) var(--ship-color-light),
+        calc(.4 * var(--res-val)) calc(.6 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) 0 var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(.6 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) 0 var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(1.6 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(.6 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(1.6 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(.6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(3.6 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(1.6 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(3.6 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(1.6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(5.6 * var(--res-val)) var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(3.6 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(5.6 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(3.6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) calc(7.6 * var(--res-val)) var(--ship-color-dark),
+        calc(2 * var(--res-val)) calc(5.6 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(7.6 * var(--res-val)) var(--ship-color-dark),
+        calc(-2 * var(--res-val)) calc(5.6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.4 * var(--res-val)) calc(9.6 * var(--res-val)) var(--ship-color-dark),
+        calc(2.4 * var(--res-val)) calc(7.6 * var(--res-val)) var(--ship-color-light),
+        calc(-2.4 * var(--res-val)) calc(9.6 * var(--res-val)) var(--ship-color-dark),
+        calc(-2.4 * var(--res-val)) calc(7.6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.8 * var(--res-val)) calc(9.6 * var(--res-val)) var(--ship-color-light),
+        calc(-2.8 * var(--res-val)) calc(9.6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.4 * var(--res-val)) calc(9.6 * var(--res-val)) var(--ship-color-dark),
+        calc(2.4 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-light),
+        calc(-2.4 * var(--res-val)) calc(9.6 * var(--res-val)) var(--ship-color-dark),
+        calc(-2.4 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(2 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(-2 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(11 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(11 * var(--res-val)) var(--ship-color-dark),
+        0 calc(11.5 * var(--res-val)) var(--ship-color-light)
+    ;
+}
+
+#destroyer::after {
+    position: absolute;
+    content: '';
+    background-color: var(--ship-color-light);
+    height: calc(1 * var(--res-val));
+    width: calc(.4 * var(--res-val));
+    top: calc(3 * var(--res-val));
+    box-shadow:
+        /* Front gun */
+        0 calc(-.5 * var(--res-val)) var(--ship-color-light),
+        0 calc(.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(1 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(1 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(1.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(2 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(2 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(1.5 * var(--res-val)) var(--ship-color-dark),
+        0 calc(2 * var(--res-val)) var(--ship-color-light),
+        
+        /* Front cannon */
+        calc(.4 * var(--res-val)) calc(4 * var(--res-val)) var(--ship-color-light),
+        calc(.4 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(4 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(6.5 * var(--res-val)) var(--ship-color-dark),
+        0 calc(6 * var(--res-val)) var(--ship-color-light),
+
+        calc(.4 * var(--res-val)) calc(6.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(6.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+
+        calc(.8 * var(--res-val)) calc(6.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(6.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(6 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(6.5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(6.5 * var(--res-val)) var(--ship-color-light),
+        calc(1.2 * var(--res-val)) calc(7 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(7 * var(--res-val)) var(--ship-color-light),
+    
+        /* Bridge */
+        0 calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        0 calc(9 * var(--res-val)) var(--ship-color-light),
+        0 calc(10 * var(--res-val)) var(--ship-color-light),
+
+        calc(.4 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(.4 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(.8 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(1.2 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(1.6 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-2 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(2 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        calc(-2 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.4 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-2.4 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(2.4 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-2.4 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(2.4 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        calc(-2.4 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2.8 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-2.8 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(2.8 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-2.8 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(2.8 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        calc(-2.8 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        
+        calc(3.2 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-3.2 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-dark),
+        calc(3.2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(-3.2 * var(--res-val)) calc(9 * var(--res-val)) var(--ship-color-light),
+        calc(3.2 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        calc(-3.2 * var(--res-val)) calc(10 * var(--res-val)) var(--ship-color-light),
+        
+        calc(3.6 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-light),
+        calc(-3.6 * var(--res-val)) calc(9.5 * var(--res-val)) var(--ship-color-light),
+        
+        /* Exhaust */
+        0 calc(15 * var(--res-val)) var(--ship-color-light),
+        0 calc(13.5 * var(--res-val)) var(--ship-color-light),
+        0 calc(12.5 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(12 * var(--res-val)) var(--ship-color-dark),
+        0 calc(11.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(12 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(12 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(11.5 * var(--res-val)) var(--ship-color-light),
+        
+        /* Helipad */
+        calc(.8 * var(--res-val)) calc(19 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(19 * var(--res-val)) var(--ship-color-light),
+        calc(.8 * var(--res-val)) calc(20 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(20 * var(--res-val)) var(--ship-color-light),
+        calc(.8 * var(--res-val)) calc(21 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(21 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(20 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(20 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(20 * var(--res-val)) var(--ship-color-light)
+    ;
+}
+
+#destroyer::before {
+    position: absolute;
+    content: '';
+    background-color: var(--ship-color-dark);
+    height: calc(5 * var(--res-val));
+    width: calc(.4 * var(--res-val));
+    top: calc(11.5 * var(--res-val));
+    box-shadow:
+        /* Fore superstructure */
+        /* Exhaust structure */
+        0 calc(3.25 * var(--res-val)) var(--ship-color-dark),
+        0 calc(3.75 * var(--res-val)) var(--ship-color-light),
+
+        calc(.4 * var(--res-val)) calc(3 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(3 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(3.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(3.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(3.25 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(3.25 * var(--res-val)) var(--ship-color-light),
+        
+        /* First deck */
+        0 calc(-.5 * var(--res-val)) var(--ship-color-light),
+
+        calc(.4 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(-1.6 * var(--res-val)) 0 var(--ship-color-dark),
+        calc(1.6 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(-.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(2 * var(--res-val)) 0 var(--ship-color-light),
+        calc(-2 * var(--res-val)) 0 var(--ship-color-light),
+        
+        calc(1.6 * var(--res-val)) calc(4.5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.6 * var(--res-val)) calc(4.5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(1.2 * var(--res-val)) calc(4.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-1.2 * var(--res-val)) calc(4.5 * var(--res-val)) var(--ship-color-dark),
+        calc(1.2 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        calc(-1.2 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.8 * var(--res-val)) calc(4.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.8 * var(--res-val)) calc(4.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.8 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        calc(-.8 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        
+        calc(.4 * var(--res-val)) calc(4.5 * var(--res-val)) var(--ship-color-dark),
+        calc(-.4 * var(--res-val)) calc(4.5 * var(--res-val)) var(--ship-color-dark),
+        calc(.4 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        calc(-.4 * var(--res-val)) calc(5 * var(--res-val)) var(--ship-color-light),
+        
+        0 calc(4.5 * var(--res-val)) var(--ship-color-dark),
+        0 calc(5 * var(--res-val)) var(--ship-color-light)
+    ;
+}
