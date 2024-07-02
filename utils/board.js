@@ -14,14 +14,15 @@ export default class Board {
             if (index < dims) {
                 const rowEl = document.createElement('div');
                 rowEl.dataset.row = letter;
-                rowEl.classList.add('row', 'w-full', 'flex', 'flex-row', 'flex-nowrap');
+                rowEl.classList.add('row', 'flex', 'flex-row', 'flex-nowrap');
                 
                 for (let i = 0; i < dims; i++) {
-                    const col = document.createElement('div');
-                    col.dataset.coor = `${letter}${i + 1}`;
-                    col.classList.add('coord', `coord-${this.type}`);
+                    const coordEl = document.createElement('div');
+                    coordEl.dataset.coor = `${letter}${i + 1}`;
+                    coordEl.classList.add('coord', `coord-${this.type}`);
+                    coordEl.style.opacity = .3;
 
-                    rowEl.appendChild(col);
+                    rowEl.appendChild(coordEl);
                 }
                 
                 rowEls.push(rowEl);
@@ -32,31 +33,19 @@ export default class Board {
     }
 
     appendRows () {
-        this.rowEls.forEach(rowEl => this.boardEl.appendChild(rowEl))
-    }
-    
-    appendDreadnought () {
-        const dreadnought = document.createElement('div');
-    
-        dreadnought.classList.add('absolute', 'bg-blue-200', 'b-ship', 'z-50');
-        dreadnought.id = 'dreadnought';
-        dreadnought.dataset.length = 4;
-        dreadnought.dataset.select = '0';
-        dreadnought.dataset.orient = 'h';
-
-        this.boardEl.appendChild(dreadnought);
-    }
-
-    appendShips () {
-        this.appendDreadnought()
+        this.rowEls.forEach(rowEl => this.boardEl.appendChild(rowEl));
     }
     
     boardReactor (type) {
         const board = document.createElement('section');
         
         board.id = `${type}-board`;
-        board.classList.add('w-1/3', 'flex', 'flex-col', 'relative');
+        board.classList.add('flex', 'flex-col', 'relative');
         
         return board
+    }
+
+    boardInit () {
+        this.appendRows();
     }
 }
