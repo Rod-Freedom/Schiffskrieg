@@ -38,25 +38,6 @@ Player.init(
       validate: {
         len: [6],
       }
-    },
-    victories: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-    defeats: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-    total_points: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-    league_level: {
-      type: DataTypes.STRING,
-      allowNull: false
     }
   },
   {
