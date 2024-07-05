@@ -4,14 +4,10 @@ const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
   try {
-    console.log('hello world');
-    console.log(req.session);
     const playerData = await Player.findOne({ where: { name: req.session.player_name } });
 
     const player = playerData.get({ plain: true });
 
-    console.log(playerData);
-    console.log(player);
     res.render('homepage', {
       player,
       logged_in: req.session.logged_in,
@@ -30,4 +26,18 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
+router.get('/game', withAuth, async (req, res) => {
+  try {
+    const playerData = await Player.findOne({ where: { name: req.session.player_name } });
+
+    const player = playerData.get({ plain: true });
+
+    res.render('game.handlebars', {
+      player,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 module.exports = router;
