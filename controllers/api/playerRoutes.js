@@ -59,16 +59,6 @@ router.post('/signup', async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error', error: err.message });
   }
 });
-
-router.post('/profile', async (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect('/profile');
-    return;
-  }
-
-  res.render('login');
-});
-
   
 module.exports = router;
   

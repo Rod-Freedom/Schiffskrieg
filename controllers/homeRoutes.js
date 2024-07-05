@@ -29,7 +29,9 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/game', withAuth, (req, res) => {
-  res.render('game.handlebars');
+  res.render('game.handlebars', {
+    logged_in: req.session.logged_in,
+  });
 });
 
 router.get('/signup', (req, res) => {
@@ -39,6 +41,12 @@ router.get('/signup', (req, res) => {
   } else {
     res.render('signup');
   }
+});
+
+router.get('/profile', withAuth, (req, res) => {
+  res.render('profile.handlebars', {
+    logged_in: req.session.logged_in,
+  });
 });
 
 
