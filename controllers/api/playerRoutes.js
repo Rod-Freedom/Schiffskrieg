@@ -22,7 +22,8 @@ router.post('/login', async (req, res) => {
       }
   
       req.session.save(() => {
-        req.session.player_name = playerData.name;
+        req.session.nickname = playerData.nickname;
+        req.session.player_id = playerData.player_id;
         req.session.logged_in = true;
         
         res.json({ player: playerData, message: 'You are now logged in!' });
@@ -42,6 +43,23 @@ router.post('/logout', (req, res) => {
       res.status(404).end();
     }
 });
+
+router.post('/signup', async (req, res) => {
+  try {
+    const player = await Player.create(req.body);
+    req.session.save(() => {
+      req.session.nickname = player.nickname;
+      req.session.player_id = player.player_id;
+      req.session.logged_in = true;
+
+      res.status(200).json(player);
+    });
+  } catch (err) {
+    // Log the error details
+    res.status(500).json({ message: 'Internal Server Error', error: err.message });
+  }
+});
+
   
 module.exports = router;
   
