@@ -6,7 +6,7 @@ router.get('/', withAuth, async (req, res) => {
   try {
     console.log('hello world');
     console.log(req.session);
-    const playerData = await Player.findOne({ where: { name: req.session.player_name } });
+    const playerData = await Player.findOne({ where: { player_id: req.session.player_id } });
 
     const player = playerData.get({ plain: true });
 
@@ -32,7 +32,12 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
-  res.render('signup');
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }else{
+    res.render('signup');
+  }
 });
 
 module.exports = router;
