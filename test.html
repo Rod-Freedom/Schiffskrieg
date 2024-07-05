@@ -3,209 +3,28 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script defer src="https://cdn.tailwindcss.com"></script>
-        <title>Schiffskrieg | Testing Ground</title>
+        <link rel="stylesheet" href="./public/css/root.css">
+        <link rel="stylesheet" href="./public/css/game.css">
+        <link rel="stylesheet" href="./public/css/ships.css">
+        <script src="https://cdn.tailwindcss.com"></script>
         <script defer type="module" src="./battleship.js"></script>
+        <title>Schiffskrieg | Testing Ground</title>
     </head>
-        
-    <style>
-        * {
-            box-sizing: border-box;
-            padding: 0;
-            margin: 0;
-        }
-        .coord {
-            aspect-ratio: 1 / 1;
-            width: calc((1 / 8) * 100%);
-            margin: 5px;
-            border-radius: 10%;
-        }
-        .coord-player {
-            background-color: rgb(77, 106, 147);
-        }
-        .coord-foe {
-            background-color: rgb(147, 77, 77);
-        }
-        .row {
-            height: calc((1 / 8) * 100%);
-        }
-        #dreadnought {
-            height: 9%;
-            margin: 10px;
-            aspect-ratio: 5 / 1;
-            border-radius: 110% 5% 5% 110% / 90% 50% 50% 90%;
-            top: -20%;
-        }
-    </style>
 
-    <body class="h-screen w-screen bg-slate-800 flex justify-center items-center">
-        <!-- <div data-select="0" id="dreadnought" class="bg-blue-200 b-ship z-50"></div> -->
-        <main class="flex flex-row p-10 h-screen w-screen justify-around items-center">
-            <!-- <section id="player-board" class="w-1/3 flex flex-col relative">
-                <div data-row="A" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                </div>
-                <div data-row="B" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                </div>
-                <div data-row="C" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                </div>
-                <div data-row="D" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                </div>
-                <div data-row="E" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                </div>
-                <div data-row="F" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                </div>
-                <div data-row="G" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                </div>
-                <div data-row="H" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                    <div data-switch="off" class="coord coord-player"></div>
-                </div>
+    <body class="h-screen w-screen bg-teal-950/50 flex justify-around items-center relative">
+        <main class="flex flex-row p-6 h-screen w-screen justify-center items-center relative">
+            <section id="shipyard" class="relative">
+                <div id="slot-1" class="slot justify-between"></div>
+                <div id="slot-2" class="slot"></div>
             </section>
-
-            <section id="foe-board" class="w-1/3 flex flex-col">
-                <div data-row="A" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                </div>
-                <div data-row="B" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                </div>
-                <div data-row="C" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                </div>
-                <div data-row="D" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                </div>
-                <div data-row="E" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                </div>
-                <div data-row="F" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                </div>
-                <div data-row="G" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                </div>
-                <div data-row="H" class="row w-full flex flex-row flex-nowrap">
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                    <div data-switch="off" class="coord coord-foe"></div>
-                </div>
-            </section> -->
         </main>
     </body>
 </html>
+    
+    
+<!-- <div data-select="0" id="dreadnought" class="bg-blue-200 b-ship z-50"></div> -->
+<!-- <section id="player-board" class="w-1/3 flex flex-col relative">
+    <div data-row="A" class="row w-full flex flex-row flex-nowrap">
+        <div data-switch="off" class="coord coord-player"></div>
+    </div>
+</section> -->

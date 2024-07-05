@@ -1,0 +1,15 @@
+.coord {
+    aspect-ratio: 1 / 1;
+    width: calc(9 * var(--res-val));
+    margin: calc(.4 * var(--res-val));
+    border-radius: 10%;
+    border: 1px solid var(--coord-color-light);
+}
+
+.coord-player {
+    background-color: var(--coord-color-dark);
+}
+
+.coord-foe {
+    background-color: rgb(147, 77, 77);
+}

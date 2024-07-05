@@ -16,10 +16,6 @@ Player.init(
       primaryKey: true,
       autoIncrement: true
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     nickname: {
         type: DataTypes.STRING,
         allowNull: false
@@ -38,25 +34,6 @@ Player.init(
       validate: {
         len: [6],
       }
-    },
-    victories: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-    defeats: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-    total_points: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0
-    },
-    league_level: {
-      type: DataTypes.STRING,
-      allowNull: false
     }
   },
   {

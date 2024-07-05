@@ -35,7 +35,6 @@ Match.init(
     },
     player_2_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: 'player',
         key: 'player_id',
