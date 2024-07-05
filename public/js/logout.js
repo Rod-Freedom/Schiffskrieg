@@ -11,6 +11,7 @@ const logout = async () => {
   }
 };
 
+
 const userProfile = async () => {
   const response = await fetch('/api/players/profile', {
     method: 'POST',
@@ -27,3 +28,4 @@ const userProfile = async () => {
 document.querySelector('#logout').addEventListener('click', logout);
 
 document.querySelector('#profile').addEventListener('click', userProfile);
+

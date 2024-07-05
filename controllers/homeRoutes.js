@@ -28,26 +28,15 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.get('/game', withAuth, async (req, res) => {
-  try {
-    const playerData = await Player.findOne({ where: { name: req.session.player_name } });
-
-    const player = playerData.get({ plain: true });
-
-    res.render('game.handlebars', {
-      player,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+router.get('/game', withAuth, (req, res) => {
+  res.render('game.handlebars');
 });
 
 router.get('/signup', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
     return;
-  }else{
+  } else {
     res.render('signup');
   }
 });
