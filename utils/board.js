@@ -1,4 +1,4 @@
-export default class Board {
+class Board {
     constructor ({ dims, rows, type }) {
         this.type = type;
         this.boardEl = this.boardReactor();
@@ -33,9 +33,10 @@ export default class Board {
             for (let i = 0; i < this.dims; i++) {
                 const coordEl = document.createElement('div');
                 coordEl.dataset.coor = `${letter}${i + 1}`;
-                coordEl.dataset.state = 'free';
-                coordEl.classList.add('coord', `coord-${this.type}`);
-                coordEl.style.opacity = .3
+                coordEl.style.opacity = .3;
+                if (this.type === 'player') coordEl.dataset.state = 'free';
+                else coordEl.dataset.intel = 'unknown';
+                coordEl.classList.add('coord', `coord-${this.type}`, 'relative');
 
                 rowEl.appendChild(coordEl);
             }
@@ -50,3 +51,5 @@ export default class Board {
         this.appendRows();
     }
 }
+
+module.exports = Board;
