@@ -1,5 +1,7 @@
-export default class Coord {
+class Coord {
     constructor ({ dataset: { coor } }) {
         this.dataset = { coor: coor };
     }
 }
+
+module.exports = Coord;
