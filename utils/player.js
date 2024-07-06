@@ -2,8 +2,8 @@ import Board from "./board.js";
 import Ship from "./ships.js";
 
 export default class Player extends Board {
-    constructor ({ type, dims, nShips, slotOne, slotTwo }) {
-        super({ type: type, dims: dims, })
+    constructor ({ dims, nShips, slotOne, slotTwo, rows }) {
+        super({ dims, rows, type: 'player'})
         this.nShips = nShips;
         this.ships = [
             { size: 2, id: 'uboat', },
@@ -12,6 +12,8 @@ export default class Player extends Board {
         ];
         this.slotOne = slotOne;
         this.slotTwo = slotTwo;
+
+        this.boardInit()
     }
 
     appendShips () {
