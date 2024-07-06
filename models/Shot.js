@@ -1,6 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const Match = require('./Match');
+const Player = require('./Player');
 
 class Shot extends Model {}
 
@@ -16,7 +17,7 @@ Shot.init(
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'Match',
+          model: Match,
           key: 'match_id',
         }
     }, 
@@ -24,7 +25,7 @@ Shot.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'player',
+        model: Player,
         key: 'player_id',
       }
     },
@@ -41,7 +42,7 @@ Shot.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Shot'
+    modelName: 'shot'
   }
 );
 

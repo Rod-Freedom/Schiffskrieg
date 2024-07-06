@@ -51,4 +51,4 @@ Match.hasMany(Shot, {
     foreignKey: 'match_id' 
 });
 
-module.exports = { Player };
+module.exports = { Player, Shot, Match };

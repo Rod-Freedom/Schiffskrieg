@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const Player = require('./Player');
 
 class Match extends Model {}
 
@@ -16,34 +17,25 @@ Match.init(
       allowNull: false,
       defaultValue: DataTypes.NOW
     }, 
-    turns: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 31
-    },
-    match_time: {
-      type: DataTypes.TIME,
-      allowNull: false
-    },
     player_1_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'player',
+        model: Player,
         key: 'player_id',
       }
     },
     player_2_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'player',
+        model: Player,
         key: 'player_id',
       }
     },
     winner_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'player',
+        model: Player,
         key: 'player_id',
       }
     },
@@ -68,7 +60,7 @@ Match.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Match'
+    modelName: 'match'
   }
 );
 
