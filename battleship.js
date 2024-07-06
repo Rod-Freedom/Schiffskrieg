@@ -1,8 +1,8 @@
-import Player from './utils/player.js';
-import Foe from './utils/foe.js';
-import Coord from './utils/coord.js';
-import Ship from './utils/ships.js';
-import Tracker from './utils/gameTracker.js';
+const Player =  require('./utils/player.js');
+const Foe =  require('./utils/foe.js');
+const Coord =  require('./utils/coord.js');
+const Ship =  require('./utils/ships.js');
+const Tracker =  require('./utils/gameTracker.js');
 
 const main = document.querySelector('main');
 const shipyard = document.querySelector('#shipyard');
@@ -38,6 +38,22 @@ const playerCoordsHover = (confirm) => {
         });
     } else {
         playerCoordEls.forEach((coord) => {
+            coord.removeEventListener('mouseenter', switchCoordFunc);
+            coord.removeEventListener('mouseleave', switchCoordFunc);
+        });
+    }
+};
+
+const foeCoordsHover = (confirm) => {
+    if (confirm) {
+        foeCoordEls.forEach((coord) => {
+            if (coord.dataset.intel === 'unknown') {
+                coord.addEventListener('mouseenter', switchCoordFunc);
+                coord.addEventListener('mouseleave', switchCoordFunc);
+            }
+        });
+    } else {
+        foeCoordEls.forEach((coord) => {
             coord.removeEventListener('mouseenter', switchCoordFunc);
             coord.removeEventListener('mouseleave', switchCoordFunc);
         });
@@ -349,6 +365,10 @@ const initGame = () => {
     main.classList.add('justify-around');
     
     foeCoordEls = document.querySelectorAll('.coord-foe');
+    foeCoordsHover(true);
+    gameTracker.addFoeShips();
+    console.log(gameTracker)
+
 };
 
 const initBoard = () => {

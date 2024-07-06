@@ -1,6 +1,6 @@
-import Shot from "./shot.js";
+const Shot = require("./shot.js");
 
-export default class Tracker {
+class Tracker {
     constructor ({ dims, nShips, rows }) {
         this.dims = dims;
         this.rows = rows.toSpliced(dims);
@@ -10,7 +10,8 @@ export default class Tracker {
         this.sinkedFoe = 0;
         this.playerCoordTracker = this.addCoords(true);
         this.playerShips = [];
-        this.turns = []
+        this.turn = 0;
+        this.turns = [];
         this.foeCoordTracker = this.addCoords(true);
         this.foeShips = [];
     }
@@ -123,12 +124,47 @@ export default class Tracker {
         }
     }
 
-    toFoeShot () {
+    foeShot () {
 
     }
 
-    playerShot () {
-        
+    foeShotMulti (coor) {
+        let hit = false;
+        let sink = true;
+        let ship = null;
+        this.playerShips.forEach(shipObj => {
+            if (shipObj.coords.includes(coor)) {
+                hit = true;
+                shipObj.hits.push(coor);
+                if (shipObj.hits.length === shipObj.coords.length) {
+                    sink = true;
+                    ship = shipObj.id;
+                }
+            }
+        })
+
+        const shot = new Shot (coor, hit, sink, ship);
+        return shot
+    }
+
+    playerShot (coor) {
+        let hit = false;
+        let sink = true;
+        let ship = null;
+        this.foeShips.forEach(shipObj => {
+            if (shipObj.coords.includes(coor)) {
+                hit = true;
+                shipObj.hits.push(coor);
+                if (shipObj.hits.length === shipObj.coords.length) {
+                    sink = true;
+                    ship = shipObj.id;
+                }
+            }
+
+        })
+
+        const shot = new Shot (coor, hit, sink, ship);
+        return shot
     }
 }
 
@@ -152,3 +188,5 @@ class coordObj {
         if (!hits) this.occupied = false
     }
 }
+
+module.exports = Tracker;

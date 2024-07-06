@@ -1,6 +1,12 @@
-export default class Shot {
-    constructor ({coord, result}) {
-        this.coord = coord;
-        this.result = result;
+class Shot {
+    constructor (coor, hit, sink, ship) {
+        this.coor = coor;
+        this.hit = hit,
+        this.sink = {
+            sink: sink,
+            ship: ship,
+        };
     }
 }
+
+module.exports = Shot;
