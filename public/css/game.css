@@ -1,15 +1,20 @@
+#alert {
+    font-family: "Source Sans 3", sans-serif;
+}
+
 .coord {
     aspect-ratio: 1 / 1;
     width: calc(9 * var(--res-val));
     margin: calc(.4 * var(--res-val));
     border-radius: 10%;
-    border: 1px solid var(--coord-color-light);
 }
 
 .coord-player {
-    background-color: var(--coord-color-dark);
+    border: 1px solid var(--player-coord-color-light);
+    background-color: var(--player-coord-color-dark);
 }
 
 .coord-foe {
-    background-color: rgb(147, 77, 77);
+    border: 1px solid var(--foe-coord-color-light);
+    background-color: var(--foe-coord-color-dark);
 }

@@ -1,41 +1,43 @@
 import Player from './utils/player.js';
+import Foe from './utils/foe.js';
 import Coord from './utils/coord.js';
 import Ship from './utils/ships.js';
+import Tracker from './utils/gameTracker.js';
 
 const main = document.querySelector('main');
-const shipyard = document.querySelectorAll('#shipyard');
+const shipyard = document.querySelector('#shipyard');
+const alertEl = document.querySelector('#alert');
 const slotOne = document.querySelector('#slot-1');
 const slotTwo = document.querySelector('#slot-2');
 const boardDims = 8;
 const shipScale = .4;
 const playerBoardObj = {
-    type: 'player',
+    rows: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
     dims: boardDims,
     nShips: 3,
     slotOne: slotOne,
     slotTwo: slotTwo,
 };
-let coords;
+const gameTracker = new Tracker(playerBoardObj);
+let playerCoordEls;
 let ships;
 let hovCoor = {};
-let dreadnought;
 let playerBoard;
-let statusObj;
 let foeBoard;
-let shipHwidth;
-let shipHheight;
+let foeCoordEls;
 let mouseX;
 let mouseY;
-let gameObj;
 
-const coordsHover = (confirm) => {
+const playerCoordsHover = (confirm) => {
     if (confirm) {
-        coords.forEach((coord) => {
-            coord.addEventListener('mouseenter', switchCoordFunc);
-            coord.addEventListener('mouseleave', switchCoordFunc);
+        playerCoordEls.forEach((coord) => {
+            if (coord.dataset.state === 'free') {
+                coord.addEventListener('mouseenter', switchCoordFunc);
+                coord.addEventListener('mouseleave', switchCoordFunc);
+            }
         });
     } else {
-        coords.forEach((coord) => {
+        playerCoordEls.forEach((coord) => {
             coord.removeEventListener('mouseenter', switchCoordFunc);
             coord.removeEventListener('mouseleave', switchCoordFunc);
         });
@@ -91,82 +93,127 @@ const shipPreview = (event) => {
     const selected = document.querySelector('[data-select="1"]');
     const shipLength = Number(selected.dataset.size);
     const row = e.dataset.coor[0];
-    const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+    const rows = gameTracker.rows;
     const rowIndex = rows.indexOf(row);
+    let previewCoords = [];
     hovCoor = new Coord(e);
+
+    const shipDetector = () => {
+        let detected = false;
+        for (let i = 0; i < previewCoords.length; i++) {
+            const coord = previewCoords[i];
+            const coordEl = document.querySelector(`[data-coor="${coord}"]`);
+            if (coordEl.dataset.state === 'occupied') {
+                detected = true;
+                break;
+            }
+        }
+
+        coordSetup(detected);
+    };
+
+    const coordSetup = (detected) => {
+        const currentCoord = document.querySelector(`[data-coor="${previewCoords[0]}"]`);
+        
+        if (detected) {
+            alertEl.classList.remove('hidden');
+            setTimeout(() => alertEl.classList.add('hidden'), 3000);
+            selected.style.filter = 'hue-rotate(180deg)';
+        } else {
+            selected.style.removeProperty('filter');
+        }
+
+        previewCoords.forEach((coord) => {
+            const coordEl = document.querySelector(`[data-coor="${coord}"]`);
+            
+            if (detected) {
+                if (coordEl.dataset.state === 'free') {
+                    coordEl.style.opacity = .6;
+                    coordEl.style.filter = 'brightness(80%) hue-rotate(180deg)';
+                    coordEl.dataset.state = 'preview';
+                }
+            } else {
+                coordEl.style.opacity = .6;
+                coordEl.style.filter = 'brightness(80%) grayscale(90%)';
+                coordEl.dataset.state = 'preview';
+                currentCoord.addEventListener('click', placeShip);
+                currentCoord.addEventListener('mouseleave', () => currentCoord.removeEventListener('click', placeShip));
+            }
+        })
+    };
     
     if (selected.dataset.orient === 'h') {
-        if ((col + shipLength) < (boardDims + 1)) {
-            for (let i = 0; i < shipLength; i++) {
-                const coord = document.querySelector(`[data-coor="${row}${i + col}"]`);
-                coord.style.opacity = .6;
-                coord.style.filter = 'brightness(80%) grayscale(90%)';
-
-            }
-        } else {
-            for (let i = 0; i < shipLength; i++) {
-                const coord = document.querySelector(`[data-coor="${row}${i + (boardDims - shipLength) + 1}"]`);
-                coord.style.opacity = .6;
-                coord.style.filter = 'brightness(80%) grayscale(90%)';
-            }
-        }
+        if ((col + shipLength) < (boardDims + 1))
+            for (let i = 0; i < shipLength; i++)
+                previewCoords.push(`${row}${i + col}`)
+        else
+            for (let i = 0; i < shipLength; i++)
+                previewCoords.push(`${row}${i + (boardDims - shipLength) + 1}`)
     } else {
-        if ((rowIndex + shipLength) < (boardDims + 1)) {
-            for (let i = 0; i < shipLength; i++) {
-                const coord = document.querySelector(`[data-coor="${rows[rowIndex + i]}${col}"]`);
-                coord.style.opacity = .6;
-                coord.style.filter = 'brightness(80%) grayscale(90%)';
-            }
-        } else {
-            for (let i = 0; i < shipLength; i++) {
-                const coord = document.querySelector(`[data-coor="${rows[i + (boardDims - shipLength)]}${col}"]`);
-                coord.style.opacity = .6;
-                coord.style.filter = 'brightness(80%) grayscale(90%)';
-            }
-        }
+        if ((rowIndex + shipLength) < (boardDims + 1))
+            for (let i = 0; i < shipLength; i++)
+                previewCoords.push(`${rows[rowIndex + i]}${col}`)
+        else
+            for (let i = 0; i < shipLength; i++)
+                previewCoords.push(`${rows[i + (boardDims - shipLength)]}${col}`)
     }
+
+    shipDetector();
 };
 
 const placeMode = () => {
-    coords.forEach(coord => {
-        coord.style.opacity = '.2';
-        coord.style.removeProperty('filter');
+    playerCoordEls.forEach(coord => {
+        if (coord.dataset.state !== 'occupied') {
+            coord.style.opacity = '.2';
+            coord.style.removeProperty('filter');
+        }
+        if (coord.dataset.state === 'preview') coord.dataset.state = 'free'
     });
 };
 
 const resetPlaceMode = () => {
+    const selected = document.querySelector('[data-select="1"]');
+    selected.style.removeProperty('filter');
     hovCoor = {};
     placeMode();
 };
 
 const exitPlaceMode = (event) => {
-    const pressed = event.code;
+    const pressed = event ? event.code : 'Enter';
     const selected = document.querySelector('[data-select="1"]');
 
     if (pressed === 'Enter') {
         hovCoor = {};
-        coordsHover(true);
-        document.removeEventListener('keypress', shipRotator);
-        document.removeEventListener('mousemove', moveShip);
-        document.removeEventListener('keypress', exitPlaceMode);
-        selected.addEventListener('click', selectShip);
-        Ship.reset(selected);
+        playerCoordsHover(true);
+        mouseX = undefined;
+        mouseY = undefined;
 
-        coords.forEach(coord => {
-            coord.style.opacity = .3;
-            coord.style.removeProperty('filter');
+        document.removeEventListener('keypress', shipRotator);
+        document.removeEventListener('keypress', exitPlaceMode);
+        document.removeEventListener('mousemove', moveShip);
+
+        playerCoordEls.forEach(coord => {
+            if (coord.dataset.state !== 'occupied') {
+                coord.style.opacity = .3;
+                coord.style.removeProperty('filter');
+            }
             coord.removeEventListener('mouseenter', shipPreview);
             coord.removeEventListener('mouseleave', resetPlaceMode);
         });
-
-        if (selected.dataset.id === 'destroyer') {
-            slotOne.classList.remove('justify-start');
-            slotOne.classList.add('justify-between');
-        }
         
-        if (selected.dataset.id === 'uboat') {
-            slotOne.classList.remove('justify-end');
-            slotOne.classList.add('justify-between');
+        if (selected) {
+            selected.addEventListener('click', selectShip)
+            Ship.reset(selected);
+            
+            if (selected.dataset.id === 'destroyer') {
+                slotOne.classList.remove('justify-start');
+                slotOne.classList.add('justify-between');
+            }
+            
+            if (selected.dataset.id === 'uboat') {
+                slotOne.classList.remove('justify-end');
+                slotOne.classList.add('justify-between');
+            }
         }
     }
 };
@@ -181,22 +228,80 @@ const moveShip = (event) => {
     const shipHeight = selected.getBoundingClientRect().height;
     
     if (selected.dataset.orient === 'v') {
-        const shipExtra = shipWidth * ((1 / shipScale) - 1) * .5;
-        const shipExtraTwo = shipHeight * ((1 / shipScale) - 1) * .5;
-        selected.style.left = `${mouseX - slotPos.left - shipExtra}px`;
-        selected.style.top = `${mouseY - slotPos.top - shipExtraTwo}px`;
+        const shipExtraX = shipWidth * ((1 / shipScale) - 1) * .5;
+        const shipExtraY = shipHeight * ((1 / shipScale) - 1) * .5;
+        selected.style.left = `${mouseX - slotPos.left - shipExtraX}px`;
+        selected.style.top = `${mouseY - slotPos.top - shipExtraY}px`;
     } else {
-        const shipExtra = ((shipHeight / shipScale) - shipWidth) * .5;
-        const shipExtraTwo = ((shipWidth / shipScale) - shipHeight) * .5;
-        selected.style.left = `${mouseX - slotPos.left - shipExtra}px`;
-        selected.style.top = `${mouseY - slotPos.top - shipExtraTwo}px`;
+        const shipExtraX = ((shipHeight / shipScale) - shipWidth) * .5;
+        const shipExtraY = ((shipWidth / shipScale) - shipHeight) * .5;
+        selected.style.left = `${mouseX - slotPos.left - shipExtraX}px`;
+        selected.style.top = `${mouseY - slotPos.top - shipExtraY}px`;
     }
+};
+
+const shipLocator = () => {
+    const previewCoordsArray = [];
+    playerCoordEls.forEach(coord => {
+        if (coord.dataset.state === 'preview') {
+            previewCoordsArray.push(coord.dataset.coor);
+        }
+    });
+
+    return previewCoordsArray
 };
 
 const placeShip = (event) => {
     const e = event.target;
+    const selected = document.querySelector('[data-select="1"]');
+    selected.style.removeProperty('scale');
 
+    const previewCoords = shipLocator();
+    const coordEl = document.querySelector(`[data-coor="${previewCoords[0]}"]`);
+    const orient = selected.dataset.orient;
+    const size = Number(selected.dataset.size);
+    const coordDims = coordEl.getBoundingClientRect();
+    const pBoardDims = playerBoard.getBoundingClientRect();
+    const coordX = coordDims.x;
+    const coordY = coordDims.y;
+    const selectedProps = getComputedStyle(selected);
+    const selectedMargin = Number(selectedProps.getPropertyValue('margin').slice(0, -2));
+    const selectedPad = Number(selectedProps.getPropertyValue('padding').slice(0, -2));
+    const coordWidth = coordDims.width + (Number(getComputedStyle(coordEl).getPropertyValue('margin').slice(0, -2)) * 2);
+    const shipDims = selected.getBoundingClientRect();
+    const shipWidth = shipDims.width + ((selectedMargin + selectedPad) * 2);
+    const shipHeight = shipDims.height + ((selectedMargin + selectedPad) * 2);
     
+    e.removeEventListener('click', placeShip);
+
+    selected.dataset.select = 0;
+    selected.classList.remove('z-50');
+    selected.classList.add('z-40');
+    selected.removeEventListener('click', selectShip);
+    previewCoords.forEach(coor => {
+        const coord = document.querySelector(`[data-coor="${coor}"]`);
+        coord.dataset.state = 'occupied';
+        coord.style.filter = 'brightness(30%)';
+    })
+
+    exitPlaceMode();
+    
+    if (orient === 'v') {
+        const coordExtraX = (coordWidth - shipWidth) * .5;
+        const coordExtraY = (((coordWidth * size) - shipHeight) * .5);
+        playerBoard.appendChild(selected);
+        selected.style.left = `${coordX + coordExtraX - pBoardDims.x}px`;
+        selected.style.top = `${coordY + coordExtraY - pBoardDims.y}px`;
+    } else {
+        const coordExtraX = ((shipWidth - shipHeight) * .5) + (((coordWidth * size) - shipWidth) * .5);
+        const coordExtraY = ((coordWidth - shipHeight) * .5) - ((shipWidth - shipHeight) * .5);
+        playerBoard.appendChild(selected);
+        selected.style.left = `${coordX + coordExtraX - pBoardDims.x}px`;
+        selected.style.top = `${coordY + coordExtraY - pBoardDims.y}px`;
+    }
+
+    gameTracker.addPlayerShip(previewCoords);
+    if (gameTracker.playerShips.length === 3) initGame()
 };
 
 const selectShip = (event) => {
@@ -213,15 +318,11 @@ const selectShip = (event) => {
         slotOne.classList.add('justify-end');
     }
 
-    coordsHover(false);
+    playerCoordsHover(false);
     placeMode();
     
     e.dataset.select = '1';
     e.classList.add('absolute');
-    const shipPadding = parseInt(getComputedStyle(e).getPropertyValue('padding'));
-    const shipMargin = parseInt(getComputedStyle(e).getPropertyValue('margin'));
-    shipHheight = (e.getBoundingClientRect().height + shipPadding) * .4;
-    shipHwidth = (e.getBoundingClientRect().width + shipPadding) * .4;
     e.style.scale = shipScale;
     
     e.removeEventListener('click', selectShip);
@@ -229,26 +330,38 @@ const selectShip = (event) => {
     document.addEventListener('keypress', shipRotator);
     document.addEventListener('keypress', exitPlaceMode);
 
-    coords.forEach((coord) => {
-        coord.addEventListener('mouseenter', shipPreview);
-        coord.addEventListener('mouseleave', resetPlaceMode);
+    playerCoordEls.forEach((coord) => {
+        if (coord.dataset.state !== 'occupied') {
+            coord.addEventListener('mouseenter', shipPreview);
+            coord.addEventListener('mouseleave', resetPlaceMode);
+        }
     });
 };
 
-const initBoards = () => {
+const initGame = () => {
+    main.removeChild(shipyard);
+
+    const newFoeBoard = new Foe(playerBoardObj);
+    foeBoard = newFoeBoard.boardEl;
+    
+
+    main.appendChild(foeBoard);
+    main.classList.add('justify-around');
+    
+    foeCoordEls = document.querySelectorAll('.coord-foe');
+};
+
+const initBoard = () => {
     const newPlayerBoard = new Player(playerBoardObj);
-    
-    newPlayerBoard.boardInit();
-    
     playerBoard = newPlayerBoard.boardEl;
 
     main.appendChild(playerBoard);
     
-    coords = document.querySelectorAll('.coord');
+    playerCoordEls = document.querySelectorAll('.coord-player');
     ships = document.querySelectorAll('.ship-div');
 
-    coordsHover(true);
+    playerCoordsHover(true);
     ships.forEach(ship => ship.addEventListener('click', selectShip));
 };
 
-window.onload = initBoards();
+window.onload = initBoard();
