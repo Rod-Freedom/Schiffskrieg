@@ -27,16 +27,9 @@ Shot.init(
         key: 'player_id',
       }
     },
-    target_x: {
+    coordinate: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    target_y: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [1],
-        }
     },
     result: {
         type: DataTypes.STRING,
