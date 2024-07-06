@@ -192,8 +192,6 @@ router.get('/profile', withAuth, async (req, res) => {
         }
       });
 
-      console.log(shotsInEachMatch)
-
        // Compute the number of misses before the first hit for each match
        let missesBeforeFirstHit = 0;
        let hitFound = false;
