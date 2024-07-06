@@ -15,6 +15,12 @@ function profileButtonHandler() {
   location.href = './profile';
 }
 
+function titleHandler() {
+  location.href = './';
+}
+
 document.querySelector('#logout').addEventListener('click', logout);
 
 document.querySelector('#profile').addEventListener('click', profileButtonHandler);
+
+document.querySelector('#tittle').addEventListener('click', titleHandler);

@@ -1,5 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const Match = require('./Match');
+const Player = require('./Player');
 
 class Shot extends Model {}
 
@@ -15,7 +17,7 @@ Shot.init(
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-          model: 'match',
+          model: Match,
           key: 'match_id',
         }
     }, 
@@ -23,20 +25,13 @@ Shot.init(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'player',
+        model: Player,
         key: 'player_id',
       }
     },
-    target_x: {
-      type: DataTypes.INTEGER,
+    coordinate: {
+      type: DataTypes.STRING,
       allowNull: false
-    },
-    target_y: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [1],
-        }
     },
     result: {
         type: DataTypes.STRING,
@@ -47,7 +42,7 @@ Shot.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'Shot'
+    modelName: 'shot'
   }
 );
 
