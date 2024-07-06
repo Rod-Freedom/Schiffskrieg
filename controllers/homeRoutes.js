@@ -48,7 +48,10 @@ router.get('/signup', (req, res) => {
 router.get('/profile', withAuth, async (req, res) => {
   try {
     const player = req.session.player_id;
-    const nickname = req.session.nickname;
+    const nickname = await Player.findOne({
+      attributes:['nickname'],
+      where: { player_id: player }
+    });
 
     const victoryCount = await Match.count({
       where: { winner_id: player }
@@ -214,7 +217,7 @@ router.get('/profile', withAuth, async (req, res) => {
      const avgFailuresBeforeFirstHit = matchesWithHits > 0 ? totalMisses / matchesWithHits : 0;
 
     res.render('profile.handlebars',{
-      nickname,
+      nickname : nickname.dataValues.nickname,
       victoryCount,
       matchesPlayed,
       defeatCount,
