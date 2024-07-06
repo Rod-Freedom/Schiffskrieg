@@ -1,0 +1,14 @@
+[
+  { "match_id": 1, "shooter_id": 1, "coordinate": "A5", "result": "Hit" },
+  { "match_id": 1, "shooter_id": 1, "coordinate": "C9", "result": "Miss" },
+
+  { "match_id": 1, "shooter_id": 2, "coordinate": "A5", "result": "Hit" },
+  { "match_id": 1, "shooter_id": 2, "coordinate": "C9", "result": "Miss" },
+
+  { "match_id": 2, "shooter_id": 3, "coordinate": "A5", "result": "Hit" },
+  { "match_id": 2, "shooter_id": 3, "coordinate": "C9", "result": "Miss" },
+
+  { "match_id": 2, "shooter_id": 4, "coordinate": "A5", "result": "Hit" },
+  { "match_id": 2, "shooter_id": 4, "coordinate": "C9", "result": "Miss" }
+
+]
