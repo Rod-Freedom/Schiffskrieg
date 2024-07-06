@@ -63,7 +63,7 @@ router.get('/profile', withAuth, async (req, res) => {
     const defeatCount = matchesPlayed - victoryCount;
 
 
-
+    // retrieve the oppponent that has win most times to the user
     const nemesis_id = await Match.findAll({
       attributes: [
         [sequelize.literal('COUNT(*)'), 'wins_count'],
@@ -91,8 +91,37 @@ router.get('/profile', withAuth, async (req, res) => {
       nemesis_id[0].opponent  = nemesis ? nemesis.nickname : null;
     }
  
+    // retrieve the coordinate with most hits by all the oponents of the user
+    const weakPoint = await Shot.findAll({
+      attributes: [
+        'coordinate',
+        [sequelize.fn('COUNT', sequelize.col('coordinate')), 'hit_count']
+      ],
+      include: [{
+        model: Match,
+        where: {
+          [sequelize.Op.or]: [
+            { player_1_id: player },
+            { player_2_id: player }
+          ]
+        },
+        attributes: [],
+        required: true
+      }],
+      where: {
+        shooter_id: {
+          [sequelize.Op.ne]: player
+        },
+        result: 'Hit'
+      },
+      group: ['coordinate'],
+      order: [[sequelize.literal('hit_count'), 'DESC']],
+      limit: 1,
+      raw: true
+    });
 
 
+    // Retrieve the average hits by each match for the user
     const avgHitsPerMatch = await Shot.findAll({
       attributes: [
         [sequelize.fn('COUNT', sequelize.col('shot.shot_id')), 'hits_per_match'],
@@ -140,17 +169,58 @@ router.get('/profile', withAuth, async (req, res) => {
     });
 
 
-        
+    // Retrieve all matches
+    const allMatches = await Match.findAll({
+      where: {
+        [sequelize.Op.or]: [
+          { player_1_id: player },
+          { player_2_id: player }
+        ]
+      }
+    });
 
-    const avgFailuresPerMatch = 2; // Replace with actual calculation
-    const avgFailuresBeforeFirstHit = 1; // Replace with actual calculation
+
+    let totalMisses = 0;
+    let matchesWithHits = 0;
+
+    // For each match, retrieve the shots ordered by their sequence or timestamp
+    for (const match of allMatches) {
+      const shotsInEachMatch = await Shot.findAll({
+        where: {
+          match_id: match.match_id,
+          shooter_id: player
+        }
+      });
+
+      console.log(shotsInEachMatch)
+
+       // Compute the number of misses before the first hit for each match
+       let missesBeforeFirstHit = 0;
+       let hitFound = false;
+       for (const shot of shotsInEachMatch) {
+         if (shot.result === 'Hit') {
+           hitFound = true;
+           break;
+         } else if (shot.result === 'Miss') {
+           missesBeforeFirstHit++;
+         }
+       };
+ 
+       // If a hit was found, include this match in the average calculation
+       if (hitFound) {
+         totalMisses += missesBeforeFirstHit;
+         matchesWithHits++;
+       };
+     };
+
+     const avgFailuresBeforeFirstHit = matchesWithHits > 0 ? totalMisses / matchesWithHits : 0;
 
     res.render('profile.handlebars',{
       nickname,
       victoryCount,
       matchesPlayed,
       defeatCount,
-      // weakPoint,
+      weakPoint : weakPoint[0].coordinate,
       nemesis : nemesis_id[0].opponent,
       avgHitsPerMatch : avgHitsPerMatch[0].hits_per_match,
       avgFailuresPerMatch : avgMissPerMatch[0].miss_per_match,
