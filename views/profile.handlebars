@@ -1,21 +1,24 @@
 <div id="header" class="w-full bg-blue-700 h-16"></div>
-
-    <div id="user-main" class="bg-blue-900 h-screen w-full p-12 flex flex-col ">
-        <div class="flex flex-row justify-between bg-slate-600 p-16 ">
-            <div class="justify-evenly text-6xl">
-                <div>
-                    <h2>User : <span> {{nickname}} </span></h2>
-                </div>
-                <div>
-                    <p>League</p>
-                </div>
-                <div>
-                    <img src="" alt="">
-                </div>
+<div id="user-main" class="bg-blue-900 h-screen w-full p-12 flex flex-col ">
+    <div class="flex flex-row justify-between bg-slate-600 p-16 ">
+        <div class="justify-evenly text-6xl">
+            <div>
+                <h2 id="nickname">User : <span> {{nickname}} </span></h2><button type="button" id="change-nickname-btn">Change</button>
+                <form id="nickname-form" style="display: none;">
+                    <input type="text" id="nickname-input" placeholder="Nickname">
+                    <button type="submit">Update</button>
+                </form>
             </div>
-            <button class="px-10 text-red-700 bg-white w-1/8 h-10" >X</button>
+            <div>
+                <p>League</p>
+            </div>
+            <div>
+                <img src="" alt="">
+            </div>
         </div>
-        <div id="stats-section" class="bg-blue-950 m-10 p-14">
+        <button class="px-10 text-red-700 bg-white w-1/8 h-10">X</button>
+    </div>
+     <div id="stats-section" class="bg-blue-950 m-10 p-14">
             <div>
                 <h3>Played matches : <span> {{matchesPlayed}} </span></h3>
             </div>
@@ -39,6 +42,8 @@
             </div>
             <div>
                 <h3>Average failures before first hit : <span>{{avgFailuresBeforeFirstHit}}</span></h3>
-            </div>
         </div>
     </div>
+</div>
+
+<script src="/js/profile.js"></script>
