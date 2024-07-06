@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Player, Match } = require('../models');
+const { Player, Match, Shot } = require('../models');
 const withAuth = require('../utils/auth');
 const sequelize = require('sequelize');
 
@@ -62,8 +62,8 @@ router.get('/profile', withAuth, async (req, res) => {
 
     const defeatCount = matchesPlayed - victoryCount;
 
-    // Placeholder values for other stats
-    const weakPoint = "A1"; // Replace with actual calculation
+
+
     const nemesis_id = await Match.findAll({
       attributes: [
         [sequelize.literal('COUNT(*)'), 'wins_count'],
@@ -90,9 +90,58 @@ router.get('/profile', withAuth, async (req, res) => {
       const nemesis = await Player.findByPk(opponentId);
       nemesis_id[0].opponent  = nemesis ? nemesis.nickname : null;
     }
+ 
 
-    console.log(nemesis_id)
-    const avgHitsPerMatch = 5; // Replace with actual calculation
+
+    const avgHitsPerMatch = await Shot.findAll({
+      attributes: [
+        [sequelize.fn('COUNT', sequelize.col('shot.shot_id')), 'hits_per_match'],
+      ],
+      include: [
+        {
+          model: Match,
+          attributes: [],
+          where: {
+            [sequelize.Op.or]: [
+              { player_1_id: player },
+              { player_2_id: player }
+            ]
+          }
+        }
+      ],
+      where: {
+        shooter_id: player,
+        result: 'Hit'
+      },
+      raw: true
+    });
+
+    const avgMissPerMatch = await Shot.findAll({
+      attributes: [
+        [sequelize.fn('COUNT', sequelize.col('shot.shot_id')), 'miss_per_match'],
+      ],
+      include: [
+        {
+          model: Match,
+          attributes: [],
+          where: {
+            [sequelize.Op.or]: [
+              { player_1_id: player },
+              { player_2_id: player }
+            ]
+          }
+        }
+      ],
+      where: {
+        shooter_id: player,
+        result: 'Miss'
+      },
+      raw: true
+    });
+
+
+        
+
     const avgFailuresPerMatch = 2; // Replace with actual calculation
     const avgFailuresBeforeFirstHit = 1; // Replace with actual calculation
 
@@ -101,10 +150,10 @@ router.get('/profile', withAuth, async (req, res) => {
       victoryCount,
       matchesPlayed,
       defeatCount,
-      weakPoint,
+      // weakPoint,
       nemesis : nemesis_id[0].opponent,
-      avgHitsPerMatch,
-      avgFailuresPerMatch,
+      avgHitsPerMatch : avgHitsPerMatch[0].hits_per_match,
+      avgFailuresPerMatch : avgMissPerMatch[0].miss_per_match,
       avgFailuresBeforeFirstHit
     });
   } catch (error) {
