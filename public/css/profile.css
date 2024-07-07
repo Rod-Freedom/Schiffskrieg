@@ -1,0 +1,10 @@
+h3 {
+    margin: 2vh;
+}
+
+.stat{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+}
