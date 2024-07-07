@@ -125,7 +125,7 @@ router.get('/profile', withAuth, async (req, res) => {
 
 
     // Retrieve the average hits by each match for the user
-    const avgHitsPerMatch = await Shot.findAll({
+    const hitsPerMatch = await Shot.findAll({
       attributes: [
         [sequelize.fn('COUNT', sequelize.col('shot.shot_id')), 'hits_per_match'],
       ],
@@ -148,7 +148,9 @@ router.get('/profile', withAuth, async (req, res) => {
       raw: true
     });
 
-    const avgMissPerMatch = await Shot.findAll({
+    const avgHitsPerMatch = matchesPlayed > 0 ? hitsPerMatch[0].hits_per_match / matchesPlayed : 0;
+
+    const missPerMatch = await Shot.findAll({
       attributes: [
         [sequelize.fn('COUNT', sequelize.col('shot.shot_id')), 'miss_per_match'],
       ],
@@ -170,6 +172,8 @@ router.get('/profile', withAuth, async (req, res) => {
       },
       raw: true
     });
+
+    const avgFailuresPerMatch = matchesPlayed > 0 ? missPerMatch[0].miss_per_match / matchesPlayed : 0;
 
 
     // Retrieve all matches
@@ -223,8 +227,8 @@ router.get('/profile', withAuth, async (req, res) => {
       defeatCount,
       weakPoint : weakPoint[0].coordinate,
       nemesis : nemesis_id[0].opponent,
-      avgHitsPerMatch : avgHitsPerMatch[0].hits_per_match,
-      avgFailuresPerMatch : avgMissPerMatch[0].miss_per_match,
+      avgHitsPerMatch,
+      avgFailuresPerMatch,
       avgFailuresBeforeFirstHit
     });
   } catch (error) {
