@@ -1,6 +1,6 @@
-const Shot = require("./shot.js");
+import Shot from "./shot.js";
 
-class Tracker {
+export default class Tracker {
     constructor ({ dims, nShips, rows }) {
         this.dims = dims;
         this.rows = rows.toSpliced(dims);
@@ -188,5 +188,3 @@ class coordObj {
         if (!hits) this.occupied = false
     }
 }
-
-module.exports = Tracker;

@@ -1,4 +1,4 @@
-class Ship {
+export default class Ship {
     constructor ({ size }) {
         this.size = size;
     }
@@ -34,5 +34,3 @@ class Ship {
         return shipDiv;
     }
 }
-
-module.exports = Ship;

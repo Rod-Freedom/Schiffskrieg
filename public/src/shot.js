@@ -1,4 +1,4 @@
-class Shot {
+export default class Shot {
     constructor (coor, hit, sink, ship) {
         this.coor = coor;
         this.hit = hit,
@@ -8,5 +8,3 @@ class Shot {
         };
     }
 }
-
-module.exports = Shot;

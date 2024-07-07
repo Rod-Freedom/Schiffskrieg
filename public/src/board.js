@@ -1,4 +1,4 @@
-class Board {
+export default class Board {
     constructor ({ dims, rows, type }) {
         this.type = type;
         this.boardEl = this.boardReactor();
@@ -51,5 +51,3 @@ class Board {
         this.appendRows();
     }
 }
-
-module.exports = Board;

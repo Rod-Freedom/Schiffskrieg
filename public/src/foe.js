@@ -1,10 +1,8 @@
-const Board = require("./board.js");
+import Board from "./board.js";
 
-class Foe extends Board {
+export default class Foe extends Board {
     constructor ({ dims, rows }) {
         super({ dims, rows, type: 'foe' })
         this.rowEls = this.rowElsReactor(this);
     }
 }
-
-module.exports = Foe;
