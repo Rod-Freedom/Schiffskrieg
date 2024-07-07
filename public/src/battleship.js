@@ -1,8 +1,8 @@
-const Player =  require('./utils/player.js');
-const Foe =  require('./utils/foe.js');
-const Coord =  require('./utils/coord.js');
-const Ship =  require('./utils/ships.js');
-const Tracker =  require('./utils/gameTracker.js');
+import Player from './player.js';
+import Foe from './foe.js';
+import Coord from './coord.js';
+import Ship from './ships.js';
+import Tracker from './gameTracker.js';
 
 const main = document.querySelector('main');
 const shipyard = document.querySelector('#shipyard');

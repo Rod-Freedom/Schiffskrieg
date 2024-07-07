@@ -10,16 +10,16 @@
 
 <body class="w-screen font-serif text-white bg-blue-700 flex flex-col justify-center align-middle">
 
-  <header >
-    <h1> <a href="./">Schiffskrieg</a>
-      
+  <header class="flex flex-col justify-center p-6">
+    <h1 class="text-9xl"> 
+      <a href="./">Schiffskrieg</a>
     </h1>
     {{#if logged_in}}
     <nav>
       <ul>
-        <li><button id="logout">logout</button></li>
+        <li><button class="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-3xl px-5 py-2.5 text-center me-2 mb-2" id="logout">logout</button></li>
         {{!-- TODO: add player name instead of profile --}}
-        <li><button id="profile">Profile</button></li>
+        <li><button class="text-white bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-3xl px-5 py-2.5 text-center me-2 mb-2" id="profile">Profile</button></li>
       </ul>
     </nav>
     {{/if}}

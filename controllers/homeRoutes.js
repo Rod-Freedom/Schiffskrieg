@@ -30,9 +30,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/game', withAuth, (req, res) => {
-  res.render('game.handlebars', {
-    logged_in: req.session.logged_in,
-  });
+  res.render('game.handlebars', { layout: false });
 });
 
 router.get('/signup', (req, res) => {
@@ -91,9 +89,9 @@ router.get('/profile', withAuth, async (req, res) => {
       const opponentId = nemesis_id[0].opponent_id;
 
       const nemesis = await Player.findByPk(opponentId);
-      nemesis_id[0].opponent  = nemesis ? nemesis.nickname : null;
+      nemesis_id[0].opponent = nemesis ? nemesis.nickname : null;
     }
- 
+
     // retrieve the coordinate with most hits by all the oponents of the user
     const weakPoint = await Shot.findAll({
       attributes: [
@@ -199,37 +197,42 @@ router.get('/profile', withAuth, async (req, res) => {
         }
       });
 
-       // Compute the number of misses before the first hit for each match
-       let missesBeforeFirstHit = 0;
-       let hitFound = false;
-       for (const shot of shotsInEachMatch) {
-         if (shot.result === 'Hit') {
-           hitFound = true;
-           break;
-         } else if (shot.result === 'Miss') {
-           missesBeforeFirstHit++;
-         }
-       };
- 
-       // If a hit was found, include this match in the average calculation
-       if (hitFound) {
-         totalMisses += missesBeforeFirstHit;
-         matchesWithHits++;
-       };
-     };
+      // Compute the number of misses before the first hit for each match
+      let missesBeforeFirstHit = 0;
+      let hitFound = false;
+      for (const shot of shotsInEachMatch) {
+        if (shot.result === 'Hit') {
+          hitFound = true;
+          break;
+        } else if (shot.result === 'Miss') {
+          missesBeforeFirstHit++;
+        }
+      };
 
-     const avgFailuresBeforeFirstHit = matchesWithHits > 0 ? totalMisses / matchesWithHits : 0;
+      // If a hit was found, include this match in the average calculation
+      if (hitFound) {
+        totalMisses += missesBeforeFirstHit;
+        matchesWithHits++;
+      };
+    };
 
-    res.render('profile.handlebars',{
+
+    const avgFailuresBeforeFirstHit = matchesWithHits > 0 ? totalMisses / matchesWithHits : 0;
+
+
+    console.log(nickname);
+
+    res.render('profile.handlebars', {
       nickname : nickname.dataValues.nickname,
       victoryCount,
       matchesPlayed,
       defeatCount,
-      weakPoint : weakPoint[0].coordinate,
-      nemesis : nemesis_id[0].opponent,
+      weakPoint: weakPoint[0].coordinate,
+      nemesis: nemesis_id[0].opponent,
       avgHitsPerMatch,
       avgFailuresPerMatch,
-      avgFailuresBeforeFirstHit
+      avgFailuresBeforeFirstHit,
+      logged_in: req.session.logged_in
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

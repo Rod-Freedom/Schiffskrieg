@@ -1,6 +1,33 @@
-<div>
-    <p>Game Board</p>
-</div>
+<!DOCTYPE html>
+<html lang="en" class="overflow-hidden">
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/game.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/root.css">
+    <link rel="stylesheet" href="/css/game.css">
+    <link rel="stylesheet" href="/css/ships.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/js/game.js"></script>
+    <script defer type="module" src="/src/battleship.js"></script>
+    <title>Schiffskrieg | Testing Ground</title>
+</head>
+
+<body class="h-screen w-screen bg-teal-950/50 flex justify-around items-center relative">
+    <main class="flex flex-row p-6 h-screen w-screen justify-center items-center relative">
+        <section id="shipyard" class="relative">
+            <div id="slot-1" class="slot justify-between"></div>
+            <div id="slot-2" class="slot"></div>
+        </section>
+        <div id="alert"
+            class="z-50 px-10 py-3 text-2xl rounded-xl bg-teal-950/30 backdrop-blur border-2 border-teal-200 text-center text-teal-100 absolute top-10 uppercase hidden">
+            Another ship is blocking the way!</div>
+    </main>
+</body>
+
+</html>

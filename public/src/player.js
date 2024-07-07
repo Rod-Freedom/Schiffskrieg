@@ -1,7 +1,7 @@
-const Board = require("./board.js");
-const Ship = require("./ships.js");
+import Board from "./board.js";
+import Ship from "./ships.js";
 
-class Player extends Board {
+export default class Player extends Board {
     constructor ({ dims, nShips, slotOne, slotTwo, rows }) {
         super({ dims, rows, type: 'player'})
         this.nShips = nShips;
@@ -30,5 +30,3 @@ class Player extends Board {
         this.appendRows()
     }
 }
-
-module.exports = Player;
