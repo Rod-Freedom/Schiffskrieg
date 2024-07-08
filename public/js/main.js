@@ -22,5 +22,3 @@ function titleHandler() {
 document.querySelector('#logout').addEventListener('click', logout);
 
 document.querySelector('#profile').addEventListener('click', profileButtonHandler);
-
-document.querySelector('#tittle').addEventListener('click', titleHandler);

@@ -16,7 +16,6 @@ const gameTracker = new SocketTracker(nShips);
 // socket.io packages
 const http = require('http');
 const { Server } = require('socket.io');
-const { match } = require('assert');
 
 const app = express();
 const httpServer = http.createServer(app);
@@ -56,7 +55,7 @@ io.engine.use(sessionMiddleware);
 
 sequelize.sync({ force: false }).then(() => {
   httpServer.listen(PORT, () => {
-    console.log(`Application is ruunint at: http://localhost:${PORT}`);
+    console.log(`Application is ruuning at: http://localhost:${PORT}`);
   });
 });
 
