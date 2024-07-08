@@ -181,5 +181,5 @@ const endGame = async (playerId, gameTracker) => {
     }
   )
   isGame = false;
-  gameTracker = new SocketTracker(nShips);
+  gameTracker.reset(nShips);
 }
