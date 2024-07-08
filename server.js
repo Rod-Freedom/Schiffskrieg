@@ -8,12 +8,8 @@ const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // In-game tracker
-const gameParamsObj = {
-  dims: 8,
-  nShips: 3,
-  rows: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
-};
-const gameTracker = new SocketTracker(gameParamsObj);
+const nShips = 3;
+const gameTracker = new SocketTracker(nShips);
 
 // socket.io packages
 const http = require('http');
@@ -121,7 +117,7 @@ io.on('connection', (socket) => {
     const shot = gameTracker.shotMulti(coor, player);
     gameTracker.shots.push(shot);
 
-    if (shot.sink.ship) {
+    if (shot.sink) {
       if (player === 1) gameTracker.sinkedPlOne++;
       else gameTracker.sinkedPlTwo++;
     }
@@ -131,11 +127,20 @@ io.on('connection', (socket) => {
       endGame();
       return
     }
+
+    if (shot.hit) gameTracker.playersPoints[player - 1] += 11134;
+    else gameTracker.playersPoints[player - 1] -= 4325;
     
-    socket.emit('your-shot', shot);
+    if (shot.sink === 'uboat') gameTracker.playersPoints[player - 1] += 50489;
+    if (shot.sink === 'destroyer') gameTracker.playersPoints[player - 1] += 78976;
+    if (shot.sink === 'dreadnought') gameTracker.playersPoints[player - 1] += 99760;
+    
+    
+    socket.emit('your-shot', shot, gameTracker.playersPoints[player - 1]);
     socket.broadcast.emit('foe-shot', shot);
 
     console.log(gameTracker.shots)
+    console.log(gameTracker.playersPoints)
   });
 });
 
