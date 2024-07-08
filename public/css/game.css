@@ -1,3 +1,7 @@
+#logo {
+    background: url(../assets/images/Schiffskrieg-Logo.svg);
+}
+
 #alert {
     font-family: "Source Sans 3", sans-serif;
 }
