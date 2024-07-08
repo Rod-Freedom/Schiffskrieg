@@ -28,7 +28,10 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/game', withAuth, (req, res) => {
-  res.render('game.handlebars', { layout: false });
+  res.render('game.handlebars', { 
+    layout: false,
+    logged_in: req.session.logged_in
+   });
 });
 
 router.get('/signup', (req, res) => {
