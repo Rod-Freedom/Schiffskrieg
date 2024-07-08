@@ -7,4 +7,8 @@ export default class Shot {
             ship: ship,
         };
     }
+
+    static take (coord) {
+        console.log(coord)
+    }
 }
