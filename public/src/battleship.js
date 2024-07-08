@@ -7,6 +7,7 @@ import Shot from './shot.js';
 
 const socket = io();
 const main = document.querySelector('main');
+const lobby = document.querySelector('#lobby-screen');
 const shipyard = document.querySelector('#shipyard');
 const alertEl = document.querySelector('#alert');
 const slotOne = document.querySelector('#slot-1');
@@ -404,7 +405,11 @@ socket.on('connect', () => console.log(`You're now connected`))
 socket.on('player-number', number => {
     console.log(`You are player ${number}`);
     playerNum = number;
-    if (number === 2) initBoard();
+    if (number === 2) {
+        initBoard();
+        lobby.classList.remove('flex')
+        lobby.classList.add('hidden')
+    }
 })
 
 socket.on('full-server', () => {
@@ -412,7 +417,11 @@ socket.on('full-server', () => {
 })
 
 socket.on('player-connection', number => {
-    if (number === 2) initBoard();
+    if (number === 2) {
+        initBoard();
+        lobby.classList.remove('flex')
+        lobby.classList.add('hidden')
+    }
 })
 
 socket.on('init-game', () => {

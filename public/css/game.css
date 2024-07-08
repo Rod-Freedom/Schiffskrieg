@@ -1,5 +1,18 @@
 #logo {
     background: url(../assets/images/Schiffskrieg-Logo.svg);
+    filter: sepia(100%) hue-rotate(100deg);
+    aspect-ratio: 1 / 1;
+    height: 100%;
+}
+
+#logo-div {
+    aspect-ratio: 1 / 1;
+    height: 30%;
+}
+
+#ping {
+    aspect-ratio: 1 / 1;
+    height: 80%;
 }
 
 #alert {
