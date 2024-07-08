@@ -1,10 +1,19 @@
 const path = require('path');
+const SocketTracker = require('./public/src/socketTracker.js');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+// In-game tracker
+const gameParamsObj = {
+  dims: 8,
+  nShips: 3,
+  rows: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
+};
+const gameTracker = new SocketTracker(gameParamsObj);
 
 // socket.io packages
 const http = require('http');
@@ -57,7 +66,6 @@ let player1 = { number: 1, connected: false, ready: false };
 let player2 = { number: 2, connected: false, ready: false };
 let players = [player1, player2];
 
-
 io.on('connection', (socket) => {
 
   // const session = socket.request.session;
@@ -88,8 +96,28 @@ io.on('connection', (socket) => {
     players[playerNum - 1].ready = false;
   });
 
+  // –––––––––––––––––––––––––––––––––––––––––––
+  // in-game funcs
+  socket.on('send-ships', (ships, player) => {
+    if (player === 1) {
+      gameTracker.playerOneShips = ships;
+      players[0].ready = true;
+    } else {
+      gameTracker.playerTwoShips = ships;
+      players[1].ready = true;
+    }
+    
+    if (players[0].ready && players[1].ready) {
+      socket.broadcast.emit('init-game', true);
+      socket.emit('init-game', true);
+      isGame = true;
+    }
+  })
+
+  socket.on('take-shot', coord => console.log(coord, 'hi'))
 });
 
+// server funcs
 function playerConnection(socket, player) {
   player.connected = true;
   console.log(`player ${player.number} conected`);
