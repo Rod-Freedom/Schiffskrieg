@@ -15,7 +15,7 @@ const httpServer = http.createServer(app);
 
 const PORT = process.env.PORT || 3001;
 
-// // Create the Handlebars.js engine object
+// Create the Handlebars.js engine object
 const hbs = exphbs.create({});
 
 const sessionMiddleware = session({
@@ -52,40 +52,51 @@ sequelize.sync({ force: false }).then(() => {
   });
 });
 
+let isGame = false;
 let player1 = { number: 1, connected: false, ready: false };
 let player2 = { number: 2, connected: false, ready: false };
+let players = [player1, player2];
+
 
 io.on('connection', (socket) => {
+
   // const session = socket.request.session;
   // console.log(session);
-  let player = {};
+  const playerNum = 0;
 
-  if (!player1.connected) {
-    playerConnection(socket, player1);
-    player = player1;
-  } else if (!player2.connected) {
-    playerConnection(socket, player2);
-    player = player2;
-  } else {
-    socket.emit('full-server');
-    console.log('Additional player connection attempted');
-    return;
+  for (const i in players) {
+    if (!players[i].connected) {
+      playerConnection(socket, players[i]);
+      playerNum = i + 1;
+    } else {
+      socket.emit('full-server');
+      console.log('Additional player connection attempted');
+      return;
+    }
   }
 
-  socket.on('disconnect', () => {
-    console.log(`Player ${player.number} disconnected.`);
-    if (player === player1) {
-      player1.connected = false;
-    } else if (player === player2) {
-      player2.connected = false;
-    };
-  })
+  if (players[0].ready & players[1].ready) {
+    socket.emit('start-game');
+    socket.broadcast('start-game');
+    isGame = true;
+  };
 
-})
+  socket.on('disconnect', () => {
+    endGame();
+    console.log(`Player ${playerNum} disconnected.`);
+    players[playerNum - 1].connected = false;
+    players[playerNum - 1].ready = false;
+  });
+
+});
 
 function playerConnection(socket, player) {
   player.connected = true;
   console.log(`player ${player.number} conected`);
   socket.emit('player-number', player.number);
   socket.broadcast.emit('player-connection', player.number);
+};
+
+const endGame = async () {
+  //query databases
 }
