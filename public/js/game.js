@@ -18,3 +18,5 @@ socket.on('full-server', () => {
 socket.on('player-connection', (number) => {
     console.log(`Player ${number} has connected`);
 })
+
+socket.emit('take-shot', 'A1')

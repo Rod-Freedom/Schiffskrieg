@@ -3,7 +3,9 @@ import Foe from './foe.js';
 import Coord from './coord.js';
 import Ship from './ships.js';
 import Tracker from './gameTracker.js';
+import Shot from './shot.js';
 
+const socket = io();
 const main = document.querySelector('main');
 const shipyard = document.querySelector('#shipyard');
 const alertEl = document.querySelector('#alert');
@@ -27,6 +29,7 @@ let foeBoard;
 let foeCoordEls;
 let mouseX;
 let mouseY;
+let playerNum;
 
 const playerCoordsHover = (confirm) => {
     if (confirm) {
@@ -50,6 +53,7 @@ const foeCoordsHover = (confirm) => {
             if (coord.dataset.intel === 'unknown') {
                 coord.addEventListener('mouseenter', switchCoordFunc);
                 coord.addEventListener('mouseleave', switchCoordFunc);
+                coord.addEventListener('click', sendShot);
             }
         });
     } else {
@@ -317,7 +321,9 @@ const placeShip = (event) => {
     }
 
     gameTracker.addPlayerShip(previewCoords);
-    if (gameTracker.playerShips.length === 3) initGame()
+    if (gameTracker.playerShips.length === 3) {
+        socket.emit('send-ships', gameTracker.playerShips, playerNum)
+    }
 };
 
 const selectShip = (event) => {
@@ -354,6 +360,13 @@ const selectShip = (event) => {
     });
 };
 
+const sendShot = (event) => {
+    const e = event.target;
+    const selectedCoord = e.dataset.coor;
+
+    socket.emit('take-shot', selectedCoord)
+};
+
 const initGame = () => {
     main.removeChild(shipyard);
 
@@ -366,9 +379,7 @@ const initGame = () => {
     
     foeCoordEls = document.querySelectorAll('.coord-foe');
     foeCoordsHover(true);
-    gameTracker.addFoeShips();
     console.log(gameTracker)
-
 };
 
 const initBoard = () => {
@@ -384,4 +395,26 @@ const initBoard = () => {
     ships.forEach(ship => ship.addEventListener('click', selectShip));
 };
 
-window.onload = initBoard();
+socket.on('connect', () => console.log(`You're now connected`))
+// socket.on('connect', initBoard)
+
+socket.on('player-number', number => {
+    console.log(`You are player ${number}`);
+    playerNum = number;
+    if (number === 2) initBoard();
+})
+
+socket.on('full-server', () => {
+    console.log('Sorry the server is full.')
+})
+
+socket.on('player-connection', number => {
+    if (number === 2) initBoard();
+})
+
+socket.on('init-game', ready => {
+    if (ready) initGame()
+})
+
+// socket.emit('take-shot', 'A1')
+// window.onload = initBoard();
