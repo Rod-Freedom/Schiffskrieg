@@ -21,3 +21,27 @@
     – coordenate X
     – coordenate Y
     – result
+
+– socket tracker
+    – who's player 1
+    – who's player 2
+    – What turn is it
+    – Which coord
+        – which result
+
+– Todo funcs
+    – Server
+        – start game
+            – receive ships
+        – global tracker obj
+        – send coord (check - answer)
+        – asign turn
+        – send end game
+    – local
+        – send ships
+        – receive end game
+        – receive turn
+        – start game after serv
+        – local tracker obj
+        – receive coord
+        – send coord

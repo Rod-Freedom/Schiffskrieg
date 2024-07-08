@@ -147,6 +147,7 @@ export default class Tracker {
         return shot
     }
 
+    // Only for single player
     playerShot (coor) {
         let hit = false;
         let sink = true;
