@@ -8,10 +8,9 @@ router.get('/', withAuth, async (req, res) => {
 
     const playerData = await Player.findOne({ where: { player_id: req.session.player_id } });
 
-    const player = playerData.get({ plain: true });
-
+    const playerInfo = playerData.get({ plain: true });
     res.render('homepage', {
-      player,
+      playerInfo,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -45,11 +44,21 @@ router.get('/signup', (req, res) => {
 
 router.get('/profile', withAuth, async (req, res) => {
   try {
+
+
+
+
+
     const player = req.session.player_id;
-    const nickname = await Player.findOne({
-      attributes:['nickname'],
+    const playerData = await Player.findOne({
       where: { player_id: player }
     });
+
+    const playerInfo = playerData.get({ plain: true });
+
+    // const nickname = playerData.get({ plain: true })
+    // console.log(nickname);
+    
 
     const victoryCount = await Match.count({
       where: { winner_id: player }
@@ -220,10 +229,10 @@ router.get('/profile', withAuth, async (req, res) => {
     const avgFailuresBeforeFirstHit = matchesWithHits > 0 ? totalMisses / matchesWithHits : 0;
 
 
-    console.log(nickname);
+    console.log(playerInfo);
 
     res.render('profile.handlebars', {
-      nickname : nickname.dataValues.nickname,
+      playerInfo,
       victoryCount,
       matchesPlayed,
       defeatCount,
