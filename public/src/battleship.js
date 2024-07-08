@@ -30,6 +30,7 @@ let foeCoordEls;
 let mouseX;
 let mouseY;
 let playerNum;
+let isTurn = false;
 
 const playerCoordsHover = (confirm) => {
     if (confirm) {
@@ -364,7 +365,10 @@ const sendShot = (event) => {
     const e = event.target;
     const selectedCoord = e.dataset.coor;
 
-    socket.emit('take-shot', selectedCoord)
+    if (isTurn === true) {
+        console.log(selectedCoord)
+        socket.emit('take-shot', selectedCoord, playerNum);
+    }
 };
 
 const initGame = () => {
@@ -396,7 +400,6 @@ const initBoard = () => {
 };
 
 socket.on('connect', () => console.log(`You're now connected`))
-// socket.on('connect', initBoard)
 
 socket.on('player-number', number => {
     console.log(`You are player ${number}`);
@@ -412,9 +415,20 @@ socket.on('player-connection', number => {
     if (number === 2) initBoard();
 })
 
-socket.on('init-game', ready => {
-    if (ready) initGame()
+socket.on('init-game', () => {
+    initGame();
+
+    if (playerNum === 1) {
+        isTurn = true;
+    }
 })
 
-// socket.emit('take-shot', 'A1')
-// window.onload = initBoard();
+socket.on('your-shot', shot => {
+    if (!shot.hit) isTurn = false;
+    console.log(isTurn, 'your')
+});
+
+socket.on('foe-shot', shot => {
+    if (!shot.hit) isTurn = true;
+    console.log(isTurn, 'foe')
+});

@@ -10,12 +10,8 @@ const { Match } = require('./models');
 const { Shots } = require('./models');
 
 // In-game tracker
-const gameParamsObj = {
-  dims: 8,
-  nShips: 3,
-  rows: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'],
-};
-const gameTracker = new SocketTracker(gameParamsObj);
+const nShips = 3;
+const gameTracker = new SocketTracker(nShips);
 
 // socket.io packages
 const http = require('http');
@@ -85,7 +81,6 @@ io.on('connection', (socket) => {
   }
   playersIds.push(playerId);
 
-
   for (const i in players) {
     if (!players[i].connected) {
       playerConnection(socket, players[i]);
@@ -118,13 +113,42 @@ io.on('connection', (socket) => {
     if (players[0].ready && players[1].ready) {
       const match = await Match.create();
       matchId = match.dataValues.match_id;
+      gameTracker.turn++;
       socket.broadcast.emit('init-game', true);
       socket.emit('init-game', true);
       isGame = true;
     }
-  });
+  })
+  
+  socket.on('take-shot', (coor, player) => {
+    const shot = gameTracker.shotMulti(coor, player);
+    gameTracker.shots.push(shot);
 
-  socket.on('take-shot', coord => console.log(coord, 'hi'));
+    if (shot.sink) {
+      if (player === 1) gameTracker.sinkedPlOne++;
+      else gameTracker.sinkedPlTwo++;
+    }
+
+    if (gameTracker.sinkedPlOne === gameTracker.nShips || gameTracker.sinkedPlTwo === gameTracker.nShips) {
+      socket.emit('winner', player);
+      endGame();
+      return
+    }
+
+    if (shot.hit) gameTracker.playersPoints[player - 1] += 11134;
+    else gameTracker.playersPoints[player - 1] -= 4325;
+    
+    if (shot.sink === 'uboat') gameTracker.playersPoints[player - 1] += 50489;
+    if (shot.sink === 'destroyer') gameTracker.playersPoints[player - 1] += 78976;
+    if (shot.sink === 'dreadnought') gameTracker.playersPoints[player - 1] += 99760;
+    
+    
+    socket.emit('your-shot', shot, gameTracker.playersPoints[player - 1]);
+    socket.broadcast.emit('foe-shot', shot);
+
+    console.log(gameTracker.shots)
+    console.log(gameTracker.playersPoints)
+  });
 });
 
 // server funcs

@@ -8,10 +8,9 @@ router.get('/', withAuth, async (req, res) => {
 
     const playerData = await Player.findOne({ where: { player_id: req.session.player_id } });
 
-    const player = playerData.get({ plain: true });
-
+    const playerInfo = playerData.get({ plain: true });
     res.render('homepage', {
-      player,
+      playerInfo,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -20,7 +19,6 @@ router.get('/', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  console.log(req)
   if (req.session.logged_in) {
     res.redirect('/');
     return;
@@ -30,7 +28,10 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/game', withAuth, (req, res) => {
-  res.render('game.handlebars', { layout: false });
+  res.render('game.handlebars', { 
+    layout: false,
+    logged_in: req.session.logged_in
+   });
 });
 
 router.get('/signup', (req, res) => {
@@ -45,8 +46,17 @@ router.get('/signup', (req, res) => {
 
 router.get('/profile', withAuth, async (req, res) => {
   try {
+
+
+
+
+
     const player = req.session.player_id;
-    const nickname = req.session.nickname;
+    const playerData = await Player.findOne({
+      where: { player_id: player }
+    });
+
+    const playerInfo = playerData.get({ plain: true });
 
     const victoryCount = await Match.count({
       where: { winner_id: player }
@@ -81,12 +91,16 @@ router.get('/profile', withAuth, async (req, res) => {
       limit: 1,
       raw: true
     });
-
+    
+    let nemesis = 'You have not been defeated' ;
+    
     if (nemesis_id.length > 0) {
       const opponentId = nemesis_id[0].opponent_id;
 
-      const nemesis = await Player.findByPk(opponentId);
-      nemesis_id[0].opponent = nemesis ? nemesis.nickname : null;
+      const nemesisInfo = await Player.findByPk(opponentId);
+      nemesis_id[0].opponent = nemesisInfo ? nemesis.nickname : null;
+
+      nemesis = nemesis_id[0].opponent;
     }
 
     // retrieve the coordinate with most hits by all the oponents of the user
@@ -120,7 +134,7 @@ router.get('/profile', withAuth, async (req, res) => {
 
 
     // Retrieve the average hits by each match for the user
-    const avgHitsPerMatch = await Shot.findAll({
+    const hitsPerMatch = await Shot.findAll({
       attributes: [
         [sequelize.fn('COUNT', sequelize.col('shot.shot_id')), 'hits_per_match'],
       ],
@@ -143,7 +157,9 @@ router.get('/profile', withAuth, async (req, res) => {
       raw: true
     });
 
-    const avgMissPerMatch = await Shot.findAll({
+    const avgHitsPerMatch = matchesPlayed > 0 ? hitsPerMatch[0].hits_per_match / matchesPlayed : 0;
+
+    const missPerMatch = await Shot.findAll({
       attributes: [
         [sequelize.fn('COUNT', sequelize.col('shot.shot_id')), 'miss_per_match'],
       ],
@@ -165,6 +181,8 @@ router.get('/profile', withAuth, async (req, res) => {
       },
       raw: true
     });
+
+    const avgFailuresPerMatch = matchesPlayed > 0 ? missPerMatch[0].miss_per_match / matchesPlayed : 0;
 
 
     // Retrieve all matches
@@ -209,18 +227,23 @@ router.get('/profile', withAuth, async (req, res) => {
       };
     };
 
+
     const avgFailuresBeforeFirstHit = matchesWithHits > 0 ? totalMisses / matchesWithHits : 0;
 
+
+    console.log(playerInfo);
+
     res.render('profile.handlebars', {
-      nickname,
+      playerInfo,
       victoryCount,
       matchesPlayed,
       defeatCount,
       weakPoint: weakPoint[0].coordinate,
-      nemesis: nemesis_id[0].opponent,
-      avgHitsPerMatch: avgHitsPerMatch[0].hits_per_match,
-      avgFailuresPerMatch: avgMissPerMatch[0].miss_per_match,
-      avgFailuresBeforeFirstHit
+      nemesis,
+      avgHitsPerMatch,
+      avgFailuresPerMatch,
+      avgFailuresBeforeFirstHit,
+      logged_in: req.session.logged_in
     });
   } catch (error) {
     res.status(500).json({ error: error.message });

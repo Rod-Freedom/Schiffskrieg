@@ -1,49 +1,59 @@
-<div id="header" class="w-full bg-blue-700 h-16"></div>
-<div id="user-main" class="bg-blue-900 h-screen w-full p-12 flex flex-col ">
-    <div class="flex flex-row justify-between bg-slate-600 p-16 ">
-        <div class="justify-evenly text-6xl">
+<head>
+    <link rel="stylesheet" href="/css/root.css">
+    <link rel="stylesheet" href="/css/profile.css">
+</head>
+
+<div id="user-main" class="w-full p-12 flex flex-col">
+    <div class="flex flex-row bg-teal-900/20 p-16 rounded-3xl" >
+        <div class="text-7xl">
             <div>
-                <h2 id="nickname">User : <span> {{nickname}} </span></h2><button type="button" id="change-nickname-btn">Change</button>
-                <form id="nickname-form" style="display: none;">
-                    <input type="text" id="nickname-input" placeholder="Nickname">
+                <h2 id="nickname">Hello  {{playerInfo.nickname}} ! </h2>
+                <button type="button" class="bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-950 font-medium rounded-lg text-3xl px-5 py-2.5 text-center me-2 mb-2" id="change-nickname-btn">Modify username</button>
+                <form id="nickname-form" style="display: none;" class="bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-950 font-medium rounded-lg text-3xl px-5 py-2.5 text-center me-2 mb-2">
+                    <input type="text" id="nickname-input" placeholder="Nickname" class="text-black">
                     <button type="submit">Update</button>
                 </form>
             </div>
-            <div>
-                <p>League</p>
-            </div>
-            <div>
-                <img src="" alt="">
-            </div>
         </div>
-        <button class="px-10 text-red-700 bg-white w-1/8 h-10">X</button>
+        
     </div>
-     <div id="stats-section" class="bg-blue-950 m-10 p-14">
-            <div>
-                <h3>Played matches : <span> {{matchesPlayed}} </span></h3>
+
+     <div id="stats-section" class="bg-teal-600/20 m-10 p-14 text-4xl rounded-3xl">
+
+            <div class="stat">
+                <h3>Played matches : </h3>  
+                <h5> {{matchesPlayed}} </h5>
             </div>
-            <div>
-                <h3>Victories : <span>{{victoryCount}}</span></h3>
+            <div class="stat">
+                <h3>Victories : </h3>
+                <h5>{{victoryCount}}</h5>
             </div>
-            <div>
-                <h3>Defeats : <span >{{defeatCount}}</span></h3>
+            <div class="stat">
+                <h3>Defeats : </h3>
+                <h5>{{defeatCount}}</h5>
             </div>
-            <div>
-                <h3>Your weakpoint(coordenate most hit by opponents) : <span>{{weakPoint}}</span></h3>
+            <div class="stat">
+                <h3>Your weakpoint(coordenate most hit by opponents) : </h3>
+                <h5>{{weakPoint}}</h5>
             </div>
-            <div>
-                <h3>Your nemesis (most times defeated by) : <span>{{nemesis}}</span></h3>
+            <div class="stat"> 
+                <h3>Your nemesis (most times defeated by) : </h3>
+                <h5>{{nemesis}}</h5>
             </div>
-            <div>
-                <h3>Average hits by match : <span></span>{{avgHitsPerMatch}}</h3>
+            <div class="stat">
+                <h3>Average hits by match : </h3>
+                <h5>{{avgHitsPerMatch}}</h5>
             </div>
-            <div>
-                <h3>Average failures by match : <span>{{avgFailuresPerMatch}}</span></h3>
+            <div class="stat">
+                <h3>Average failures by match : </h3>
+                <h5>{{avgFailuresPerMatch}}</h5>
             </div>
-            <div>
-                <h3>Average failures before first hit : <span>{{avgFailuresBeforeFirstHit}}</span></h3>
+            <div class="stat">
+                <h3>Average misses before first hit : </h3>
+                <h5>{{avgFailuresBeforeFirstHit}}</h5>
         </div>
     </div>
 </div>
+
 
 <script src="/js/profile.js"></script>

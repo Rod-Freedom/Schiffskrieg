@@ -1,0 +1,19 @@
+h3 {
+    margin: 2vh;
+}
+
+.stat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+}
+
+.stat>h5{
+    text-align: center;
+    border:dashed;
+    width: 20vw;
+    border-radius: 1.5rem;
+
+}

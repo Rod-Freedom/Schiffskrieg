@@ -1,14 +1,9 @@
 export default class Shot {
-    constructor (coor, hit, sink, ship) {
+    constructor (coor, hit, ship, playerId, matchId) {
         this.coor = coor;
         this.hit = hit,
-        this.sink = {
-            sink: sink,
-            ship: ship,
-        };
-    }
-
-    static take (coord) {
-        console.log(coord)
+        this.sink = ship,
+        this.playerId = playerId === undefined ? playerId : '';
+        this.matchId = matchId === undefined ? matchId : '';
     }
 }
