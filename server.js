@@ -62,21 +62,22 @@ sequelize.sync({ force: false }).then(() => {
 });
 
 let isGame = false;
-let player1 = { number: 1, connected: false, ready: false };
-let player2 = { number: 2, connected: false, ready: false };
-let players = [player1, player2];
+const player1 = { number: 1, connected: false, ready: false };
+const player2 = { number: 2, connected: false, ready: false };
+const players = [player1, player2];
 
 io.on('connection', (socket) => {
 
   // const session = socket.request.session;
   // console.log(session);
-  const playerNum = 0;
+  let playerNum;
 
   for (const i in players) {
     if (!players[i].connected) {
       playerConnection(socket, players[i]);
-      playerNum = i + 1;
-    } else {
+      playerNum = Number(i) + 1;
+      break;
+    } else if (players[0].connected && players[1].connected) {
       socket.emit('full-server');
       console.log('Additional player connection attempted');
       return;
@@ -125,6 +126,6 @@ function playerConnection(socket, player) {
   socket.broadcast.emit('player-connection', player.number);
 };
 
-const endGame = async () {
+const endGame = async () => {
   //query databases
-}
+};
