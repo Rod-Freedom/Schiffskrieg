@@ -1,12 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
     color-scheme: dark;
     --res-val: .9vh;
     --ship-color-light: rgb(148, 233, 213);
     --ship-color-dark: rgb(60, 163, 139);
     --player-coord-color-dark: rgb(77, 211, 180);
+    --player-coord-color-dark-SVG: #4dd3b4;
     --player-coord-color-light: rgb(255, 255, 255);
     --foe-coord-color-dark: rgb(225, 52, 52);
-    --foe-coord-color-dark: #e13434;
+    --foe-coord-color-dark–SVG: #e13434;
     --foe-coord-color-light: rgb(255, 109, 109);
 }
 

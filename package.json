@@ -5,8 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "seed": "node seeds/seed.js"
+    "nodemon": "nodemon server.js",
+    "seed": "node seeds/seed.js",
+    "tailwind": "tailwindcss -i ./public/css/root.css -o ./public/css/output.css --watch",
+    "start": "npm run nodemon && npm run tailwind"
   },
   "keywords": [],
   "author": "",
