@@ -103,7 +103,7 @@ router.get('/profile', withAuth, async (req, res) => {
       nemesis = nemesis_id[0].opponent;
     }
 
-    let weakestPoint = null;
+    let weakestPoint = '-';
     // retrieve the coordinate with most hits by all the oponents of the user
     const weakPoint = await Shot.findAll({
       attributes: [

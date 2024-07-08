@@ -106,8 +106,7 @@ If you have suggestions or want to help with some improvements, you can write me
 [(Back to the Top)](#about-the-project)
 
 ## Credits
-All the code was created from scratch by [Rod's Freedom](https://github.com/Rod-Freedom), Dave + GH url, and Yord + GH url...
-
+All the code was created from scratch by [Rod's Freedom](https://github.com/Rod-Freedom), Dave + GH url, and [Eynar](https://github.com/yordanop)
 <br>
 
 [(Back to the Top)](#about-the-project)
