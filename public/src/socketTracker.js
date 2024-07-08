@@ -9,8 +9,7 @@ class Tracker {
         this.playerTwoCoordTracker = this.addCoords(true);
         this.playerOneShips = [];
         this.playerTwoShips = [];
-        this.turn = 0;
-        this.turns = [];
+        this.shots = [];
     }
 
     addCoords (hits) {
