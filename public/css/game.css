@@ -15,6 +15,14 @@
     height: 80%;
 }
 
+.miss {
+    background: url(../assets/images/miss_Player_Schiffskrieg.svg);
+    background-size: cover;
+    height: 90%;
+    aspect-ratio: 1 / 1;
+
+}
+
 #alert {
     font-family: "Source Sans 3", sans-serif;
 }

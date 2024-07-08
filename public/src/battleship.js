@@ -365,9 +365,11 @@ const selectShip = (event) => {
 const sendShot = (event) => {
     const e = event.target;
     const selectedCoord = e.dataset.coor;
+    e.removeEventListener('click', sendShot);
+    e.dataset.intel = 'pending';
+
 
     if (isTurn === true) {
-        console.log(selectedCoord)
         socket.emit('take-shot', selectedCoord, playerNum);
     }
 };
@@ -384,7 +386,6 @@ const initGame = () => {
 
     foeCoordEls = document.querySelectorAll('.coord-foe');
     foeCoordsHover(true);
-    console.log(gameTracker)
 };
 
 const initBoard = () => {
@@ -406,9 +407,8 @@ socket.on('player-number', number => {
     console.log(`You are player ${number}`);
     playerNum = number;
     if (number === 2) {
+        document.body.removeChild(lobby);
         initBoard();
-        lobby.classList.remove('flex')
-        lobby.classList.add('hidden')
     }
 })
 
@@ -418,9 +418,8 @@ socket.on('full-server', () => {
 
 socket.on('player-connection', number => {
     if (number === 2) {
+        document.body.removeChild(lobby);
         initBoard();
-        lobby.classList.remove('flex')
-        lobby.classList.add('hidden')
     }
 })
 
@@ -433,7 +432,15 @@ socket.on('init-game', () => {
 })
 
 socket.on('your-shot', shot => {
-    if (!shot.hit) isTurn = false;
+    const shotCoord = document.querySelector('[data-intel="pending"]');
+
+    if (!shot.hit) {
+        isTurn = false;
+        shotCoord.dataset.intel = 'miss';
+    } else {
+
+    }
+
     console.log(isTurn, 'your')
 });
 

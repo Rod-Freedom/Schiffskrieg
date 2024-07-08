@@ -6,4 +6,6 @@ export default class Shot {
         this.playerId = playerId === undefined ? playerId : '';
         this.matchId = matchId === undefined ? matchId : '';
     }
+
+    static hit () {}
 }
