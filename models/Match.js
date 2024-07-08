@@ -2,7 +2,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const Player = require('./Player');
 
-class Match extends Model {}
+class Match extends Model { }
 
 Match.init(
   {
@@ -16,10 +16,9 @@ Match.init(
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: DataTypes.NOW
-    }, 
+    },
     player_1_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       references: {
         model: Player,
         key: 'player_id',
@@ -41,19 +40,20 @@ Match.init(
     },
     player_1_points: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 0
     },
     player_2_points: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 0
     },
     player_1_league_snapshot: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     player_2_league_snapshot: {
       type: DataTypes.STRING,
-      allowNull: false
+
     }
   },
   {
