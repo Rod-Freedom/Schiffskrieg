@@ -109,13 +109,34 @@ io.on('connection', (socket) => {
     }
     
     if (players[0].ready && players[1].ready) {
+      gameTracker.turn++;
+      
       socket.broadcast.emit('init-game', true);
       socket.emit('init-game', true);
       isGame = true;
     }
   })
+  
+  socket.on('take-shot', (coor, player) => {
+    const shot = gameTracker.shotMulti(coor, player);
+    gameTracker.shots.push(shot);
 
-  socket.on('take-shot', coord => console.log(coord, 'hi'))
+    if (shot.sink.ship) {
+      if (player === 1) gameTracker.sinkedPlOne++;
+      else gameTracker.sinkedPlTwo++;
+    }
+
+    if (gameTracker.sinkedPlOne === gameTracker.nShips || gameTracker.sinkedPlTwo === gameTracker.nShips) {
+      socket.emit('winner', player);
+      endGame();
+      return
+    }
+    
+    socket.emit('your-shot', shot);
+    socket.broadcast.emit('foe-shot', shot);
+
+    console.log(gameTracker.shots)
+  });
 });
 
 // server funcs
@@ -126,6 +147,6 @@ function playerConnection(socket, player) {
   socket.broadcast.emit('player-connection', player.number);
 };
 
-const endGame = async () => {
+const endGame = () => {
   //query databases
 };
