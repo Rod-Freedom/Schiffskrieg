@@ -33,28 +33,29 @@ class Tracker {
 
     }
 
-
-
-    foeShotMulti (coor) {
+    shotMulti (coor, player, playerId, matchId) {
+        let playerShips;
         let hit = false;
-        let sink = true;
         let ship = null;
-        this.playerShips.forEach(shipObj => {
+        
+        if (player === 1) playerShips = this.playerTwoShips
+        else playerShips = this.playerOneShips
+
+        playerShips.forEach(shipObj => {
             if (shipObj.coords.includes(coor)) {
                 hit = true;
                 shipObj.hits.push(coor);
                 if (shipObj.hits.length === shipObj.coords.length) {
-                    sink = true;
                     ship = shipObj.id;
                 }
             }
         })
 
-        const shot = new Shot (coor, hit, sink, ship);
+        const shot = new Shot(coor, hit, ship, playerId, matchId);
         return shot
     }
 
-    playerShot (coor) {
+    singleShot (coor) {
         let hit = false;
         let sink = true;
         let ship = null;
@@ -80,6 +81,17 @@ class coordObj {
         this.id = coor;
         this.state = false;
         if (!hits) this.occupied = false
+    }
+}
+
+class Shot {
+    constructor (coor, hit, sink, ship) {
+        this.coor = coor;
+        this.hit = hit,
+        this.sink = {
+            sink: sink,
+            ship: ship,
+        };
     }
 }
 
