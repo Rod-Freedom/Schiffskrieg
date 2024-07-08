@@ -2,13 +2,14 @@
     <link rel="stylesheet" href="/css/root.css">
     <link rel="stylesheet" href="/css/profile.css">
 </head>
-<div id="user-main" class="w-full p-12 flex flex-col ">
-    <div class="flex flex-row bg-blue-900 p-16" >
+
+<div id="user-main" class="w-full p-12 flex flex-col">
+    <div class="flex flex-row bg-teal-900/20 p-16 rounded-3xl" >
         <div class="text-7xl">
             <div>
                 <h2 id="nickname">Hello  {{playerInfo.nickname}} ! </h2>
-                <button type="button" class="text-white bg-gradient-to-r from-teal-600 via-teal-700 to-teal-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-900 font-medium rounded-lg text-3xl px-5 py-2.5 text-center me-2 mb-2" id="change-nickname-btn">Modify username</button>
-                <form id="nickname-form" style="display: none;" class="text-white bg-gradient-to-r from-teal-600 via-teal-700 to-teal-800 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg px-5 py-2.5 text-center me-2 mb-2">
+                <button type="button" class="bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-950 font-medium rounded-lg text-3xl px-5 py-2.5 text-center me-2 mb-2" id="change-nickname-btn">Modify username</button>
+                <form id="nickname-form" style="display: none;" class="bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-950 font-medium rounded-lg text-3xl px-5 py-2.5 text-center me-2 mb-2">
                     <input type="text" id="nickname-input" placeholder="Nickname" class="text-black">
                     <button type="submit">Update</button>
                 </form>
@@ -16,7 +17,9 @@
         </div>
         
     </div>
-     <div id="stats-section" class="bg-teal-600/20 m-10 p-14 text-4xl">
+
+     <div id="stats-section" class="bg-teal-600/20 m-10 p-14 text-4xl rounded-3xl">
+
             <div class="stat">
                 <h3>Played matches : </h3>  
                 <h5> {{matchesPlayed}} </h5>

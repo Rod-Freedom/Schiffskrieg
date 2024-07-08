@@ -4,23 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap"
+      rel="stylesheet">
   <link rel="stylesheet" href="/css/root.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer type="module" src="/src/battleship.js"></script>
   <title>Schiffskrieg</title>
 </head>
 
-<body class="w-screen font-serif text-teal-300  flex flex-col justify-center align-middle bg-teal-950">
+<body class="w-screen font-serif text-teal-300  flex flex-col justify-center align-middle bg-teal-950 text-xl">
 
   <header class="flex flex-col justify-center p-6">
-    <h1 class="text-9xl self-center"> 
+    <h1 class="text-9xl self-center p-5"> 
       <a href="./">Schiffskrieg</a>
     </h1>
     {{#if logged_in}}
     <nav>
-      <div class="flex flex-row self-end">
-       <button class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-teal-800 font-medium rounded-lg text-3xl px-5 py-2.5 text-center me-2 mb-2" id="logout">logout</button>
+      <div class="w-full flex flex-row-reverse content-center">
+        <button class="bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-950 font-medium rounded-lg text-3xl px-5 py-2.5 text-center me-2 mb-2" id="logout">Log out</button>
           {{!-- TODO: add player name instead of profile --}}
-        <button class="text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-3xl px-5 py-2.5 text-center me-2 mb-2" id="profile">{{playerInfo.nickname}}</button>
+        <button class="bg-gradient-to-r from-teal-700 via-teal-800 to-teal-900 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-500 dark:focus:ring-teal-950 font-medium rounded-lg text-3xl px-5 py-2.5 text-center me-2 mb-2" id="profile">{{playerInfo.nickname}}</button>
+
 
       </div>
     </nav>
@@ -28,7 +34,7 @@
   </header>
 
 
-  <main>
+  <main class="flex flex-row p-6 w-screen justify-center items-center relative">
     {{{ body }}}
   </main>
   <footer>
