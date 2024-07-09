@@ -36,7 +36,7 @@ export default class Board {
                 coordEl.style.opacity = .3;
                 if (this.type === 'player') coordEl.dataset.state = 'free';
                 else coordEl.dataset.intel = 'unknown';
-                coordEl.classList.add('coord', `coord-${this.type}`, 'relative');
+                coordEl.classList.add('flex', 'justify-center', 'items-center', 'coord', `coord-${this.type}`, `bg-coord-${this.type}`, 'relative');
 
                 rowEl.appendChild(coordEl);
             }
