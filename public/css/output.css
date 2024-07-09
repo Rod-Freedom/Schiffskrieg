@@ -578,10 +578,6 @@ video {
   margin: 2.5rem;
 }
 
-.m-12 {
-  margin: 3rem;
-}
-
 .m-2 {
   margin: 0.5rem;
 }
@@ -618,6 +614,14 @@ video {
   aspect-ratio: 1 / 1;
 }
 
+.h-1\/6 {
+  height: 16.666667%;
+}
+
+.h-5\/6 {
+  height: 83.333333%;
+}
+
 .h-full {
   height: 100%;
 }
@@ -636,6 +640,12 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.scale-75 {
+  --tw-scale-x: .75;
+  --tw-scale-y: .75;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 @keyframes ping {
@@ -679,16 +689,16 @@ video {
   align-items: center;
 }
 
+.justify-start {
+  justify-content: flex-start;
+}
+
 .justify-center {
   justify-content: center;
 }
 
 .justify-between {
   justify-content: space-between;
-}
-
-.justify-around {
-  justify-content: space-around;
 }
 
 .self-center {
@@ -717,6 +727,10 @@ video {
 
 .border-2 {
   border-width: 2px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
 }
 
 .border-teal-200 {
@@ -803,6 +817,11 @@ video {
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
+}
+
+.px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 
 .px-3 {
@@ -898,6 +917,10 @@ video {
   text-transform: uppercase;
 }
 
+.leading-none {
+  line-height: 1;
+}
+
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
@@ -918,6 +941,10 @@ video {
   color: rgb(94 234 212 / var(--tw-text-opacity));
 }
 
+.opacity-0 {
+  opacity: 0;
+}
+
 .backdrop-blur {
   --tw-backdrop-blur: blur(8px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
@@ -932,10 +959,11 @@ video {
   --ship-color-light: rgb(148, 233, 213);
   --ship-color-dark: rgb(60, 163, 139);
   --player-coord-color-dark: rgb(77, 211, 180);
-  --player-coord-color-dark-SVG: #4dd3b4;
+  --player-coord-color-light-SVG: #94e9d5;
   --player-coord-color-light: rgb(255, 255, 255);
   --foe-coord-color-dark: rgb(225, 52, 52);
-  --foe-coord-color-dark–SVG: #e13434;
+  --foe-coord-color-miss: rgb(71, 11, 11);
+  --foe-coord-color-dark–SVG: #ff6d6d;
   --foe-coord-color-light: rgb(255, 109, 109);
 }
 
@@ -943,6 +971,7 @@ video {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: var(--font-content);
 }
 
 .bg-dark-teal{
@@ -957,8 +986,10 @@ video {
   font-family: var(--font-content);
 }
 
-:root {
-  --res-val: .9vh;
+@media (max-aspect-ratio: 1.4 / 1) {
+  :root {
+    --res-val: .7vh;
+  }
 }
 
 .hover\:bg-gradient-to-br:hover {
