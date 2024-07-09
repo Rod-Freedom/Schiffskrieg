@@ -17,10 +17,16 @@
 ### **Overview**
 Become the ultimate naval warfare admiral with Schiffskrieg.
 
-Write a description
+This is an online battle ship game
+We enjoy board games and even more to play battle ship
+User story:
+    AS A battleship enthusiast
+    I WANT to play the board game anywhere WITH my friends
+    SO THAT I entertain and practice to distract myself
+
 
 *Find the repo [here](https://github.com/Rod-Freedom/Schiffskrieg).*<br>
-*Find the site [here](url)!*
+*Find the site [here](https://schiffskrieg.onrender.com)!*
 
 <br>
 <br>
@@ -70,14 +76,14 @@ Write a description
 [(Back to the Top)](#about-the-project)
 
 ## Get Started
-write get started
+Make an account on the signup page to start a session.
 
 <br>
 
 [(Back to the Top)](#about-the-project)
 
 ## Usage
-write usage
+In the first page you just need to click on "Play", When the button with the username is clicked an stats section will be rendered.
 
 <br>
 

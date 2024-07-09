@@ -46,11 +46,6 @@ router.get('/signup', (req, res) => {
 
 router.get('/profile', withAuth, async (req, res) => {
   try {
-
-
-
-
-
     const player = req.session.player_id;
     const playerData = await Player.findOne({
       where: { player_id: player }
