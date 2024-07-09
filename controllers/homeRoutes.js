@@ -86,17 +86,17 @@ router.get('/profile', withAuth, async (req, res) => {
       limit: 1,
       raw: true
     });
+
     
     let nemesis = 'You have not been defeated' ;
     
     if (nemesis_id.length > 0) {
       const opponentId = nemesis_id[0].opponent_id;
-
       const nemesisInfo = await Player.findByPk(opponentId);
-      nemesis_id[0].opponent = nemesisInfo ? nemesis.nickname : null;
-
-      nemesis = nemesis_id[0].opponent;
-    }
+      const nemesisData = nemesisInfo.get({ plain: true });
+      
+      nemesis = nemesisData.nickname;
+    };
 
     let weakestPoint = '-';
     // retrieve the coordinate with most hits by all the oponents of the user
