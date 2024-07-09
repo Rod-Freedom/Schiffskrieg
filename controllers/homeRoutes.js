@@ -46,11 +46,6 @@ router.get('/signup', (req, res) => {
 
 router.get('/profile', withAuth, async (req, res) => {
   try {
-
-
-
-
-
     const player = req.session.player_id;
     const playerData = await Player.findOne({
       where: { player_id: player }
@@ -103,6 +98,7 @@ router.get('/profile', withAuth, async (req, res) => {
       nemesis = nemesis_id[0].opponent;
     }
 
+    let weakestPoint = '-';
     // retrieve the coordinate with most hits by all the oponents of the user
     const weakPoint = await Shot.findAll({
       attributes: [
@@ -132,6 +128,9 @@ router.get('/profile', withAuth, async (req, res) => {
       raw: true
     });
 
+    if (weakPoint.length > 0){
+      weakestPoint = weakPoint[0].coordinate;
+    };
 
     // Retrieve the average hits by each match for the user
     const hitsPerMatch = await Shot.findAll({
@@ -230,15 +229,12 @@ router.get('/profile', withAuth, async (req, res) => {
 
     const avgFailuresBeforeFirstHit = matchesWithHits > 0 ? totalMisses / matchesWithHits : 0;
 
-
-    console.log(playerInfo);
-
     res.render('profile.handlebars', {
       playerInfo,
       victoryCount,
       matchesPlayed,
       defeatCount,
-      weakPoint: weakPoint[0].coordinate,
+      weakPoint: weakestPoint,
       nemesis,
       avgHitsPerMatch,
       avgFailuresPerMatch,

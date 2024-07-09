@@ -1,5 +1,5 @@
 class Tracker {
-    constructor (nShips) {
+    constructor(nShips) {
         this.nShips = nShips;
         this.sinkedPlOne = 0;
         this.sinkedPlTwo = 0;
@@ -9,11 +9,11 @@ class Tracker {
         this.shots = [];
     }
 
-    shotMulti (coor, player, playerId, matchId) {
+    shotMulti(coor, player, playerId, matchId) {
         let playerShips;
         let hit = false;
         let ship = null;
-        
+
         if (player === 1) playerShips = this.playerTwoShips
         else playerShips = this.playerOneShips
 
@@ -30,13 +30,22 @@ class Tracker {
         const shot = new Shot(coor, hit, ship, playerId, matchId);
         return shot
     }
+    reset(nShips) {
+        this.nShips = nShips;
+        this.sinkedPlOne = 0;
+        this.sinkedPlTwo = 0;
+        this.playerOneShips = [];
+        this.playerTwoShips = [];
+        this.playersPoints = [0, 0];
+        this.shots = [];
+    }
 }
 
 class Shot {
-    constructor (coor, hit, ship, playerId, matchId) {
+    constructor(coor, hit, ship, playerId, matchId) {
         this.coor = coor;
-        this.hit = hit,
-        this.sink = ship,
+        this.hit = hit;
+        this.sink = ship;
         this.playerId = playerId === undefined ? playerId : '';
         this.matchId = matchId === undefined ? matchId : '';
     }

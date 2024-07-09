@@ -8,7 +8,8 @@
     "nodemon": "nodemon server.js",
     "seed": "node seeds/seed.js",
     "tailwind": "tailwindcss -i ./public/css/root.css -o ./public/css/output.css --watch",
-    "start": "npm run nodemon && npm run tailwind"
+    "dev": "npm run nodemon && npm run tailwind",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",

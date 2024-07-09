@@ -87,10 +87,10 @@ const switchPlayerCoordFunc = (event) => {
 
 const shipRotator = (event) => {
     const pressed = event.code;
-    
+
     if (pressed === 'Space') {
         const selected = document.querySelector('[data-select="1"]');
-        
+
         if (selected.dataset.orient === 'h') {
             selected.style.removeProperty('rotate');
             selected.dataset.orient = 'v';
@@ -98,7 +98,7 @@ const shipRotator = (event) => {
             selected.style.rotate = '-90deg';
             selected.dataset.orient = 'h';
         }
-        
+
         const slotPos = selected.parentElement.getBoundingClientRect();
         const shipWidth = selected.getBoundingClientRect().width;
         const shipHeight = selected.getBoundingClientRect().height;
@@ -147,7 +147,7 @@ const shipPreview = (event) => {
 
     const coordSetup = (detected) => {
         const currentCoord = document.querySelector(`[data-coor="${previewCoords[0]}"]`);
-        
+
         if (detected) {
             alertEl.classList.remove('hidden');
             setTimeout(() => alertEl.classList.add('hidden'), 3000);
@@ -158,7 +158,7 @@ const shipPreview = (event) => {
 
         previewCoords.forEach((coord) => {
             const coordEl = document.querySelector(`[data-coor="${coord}"]`);
-            
+
             if (detected) {
                 if (coordEl.dataset.state === 'free') {
                     coordEl.style.opacity = .6;
@@ -174,7 +174,7 @@ const shipPreview = (event) => {
             }
         })
     };
-    
+
     if (selected.dataset.orient === 'h') {
         if ((col + shipLength) < (boardDims + 1))
             for (let i = 0; i < shipLength; i++)
@@ -233,16 +233,16 @@ const exitPlaceMode = (event) => {
             coord.removeEventListener('mouseenter', shipPreview);
             coord.removeEventListener('mouseleave', resetPlaceMode);
         });
-        
+
         if (selected) {
             selected.addEventListener('click', selectShip)
             Ship.reset(selected);
-            
+
             if (selected.dataset.id === 'destroyer') {
                 slotOne.classList.remove('justify-start');
                 slotOne.classList.add('justify-between');
             }
-            
+
             if (selected.dataset.id === 'uboat') {
                 slotOne.classList.remove('justify-end');
                 slotOne.classList.add('justify-between');
@@ -259,7 +259,7 @@ const moveShip = (event) => {
     selected.style.scale = shipScale;
     const shipWidth = selected.getBoundingClientRect().width;
     const shipHeight = selected.getBoundingClientRect().height;
-    
+
     if (selected.dataset.orient === 'v') {
         const shipExtraX = shipWidth * ((1 / shipScale) - 1) * .5;
         const shipExtraY = shipHeight * ((1 / shipScale) - 1) * .5;
@@ -304,7 +304,7 @@ const placeShip = (event) => {
     const shipDims = selected.getBoundingClientRect();
     const shipWidth = shipDims.width + ((selectedMargin + selectedPad) * 2);
     const shipHeight = shipDims.height + ((selectedMargin + selectedPad) * 2);
-    
+
     e.removeEventListener('click', placeShip);
 
     selected.dataset.select = 0;
@@ -318,7 +318,7 @@ const placeShip = (event) => {
     })
 
     exitPlaceMode();
-    
+
     if (orient === 'v') {
         const coordExtraX = (coordWidth - shipWidth) * .5;
         const coordExtraY = (((coordWidth * size) - shipHeight) * .5);
@@ -347,7 +347,7 @@ const selectShip = (event) => {
         slotOne.classList.remove('justify-between');
         slotOne.classList.add('justify-start');
     }
-    
+
     if (e.dataset.id === 'uboat') {
         slotOne.classList.remove('justify-between');
         slotOne.classList.add('justify-end');
@@ -355,11 +355,11 @@ const selectShip = (event) => {
 
     playerCoordsHover(false);
     placeMode();
-    
+
     e.dataset.select = '1';
     e.classList.add('absolute');
     e.style.scale = shipScale;
-    
+
     e.removeEventListener('click', selectShip);
     document.addEventListener('mousemove', moveShip);
     document.addEventListener('keypress', shipRotator);
@@ -390,11 +390,11 @@ const initGame = () => {
 
     const newFoeBoard = new Foe(playerBoardObj);
     foeBoard = newFoeBoard.boardEl;
-    
+
 
     main.appendChild(foeBoard);
     main.classList.add('justify-around');
-    
+
     foeCoordEls = document.querySelectorAll('.coord-foe');
     foeCoordsHover(true);
 };
@@ -405,7 +405,7 @@ const initBoard = () => {
     playerBoard = newPlayerBoard.boardEl;
 
     main.appendChild(playerBoard);
-    
+
     playerCoordEls = document.querySelectorAll('.coord-player');
     ships = document.querySelectorAll('.ship-div');
 
@@ -475,4 +475,9 @@ socket.on('your-shot', shot => {
 
 socket.on('foe-shot', shot => {
     if (!shot.hit) isTurn = true;
+});
+
+socket.on('close-game', () => {
+    console.log('Goodbye');
+    socket.disconnect();
 });
