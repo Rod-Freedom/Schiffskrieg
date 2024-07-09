@@ -1,3 +1,7 @@
+main {
+    transition: 50ms;
+}
+
 #logo {
     background: url(../assets/images/Schiffskrieg-Logo.svg);
     filter: sepia(100%) hue-rotate(100deg);
@@ -15,12 +19,18 @@
     height: 80%;
 }
 
-.miss {
-    background: url(../assets/images/miss_Player_Schiffskrieg.svg);
+.shot-div {
     background-size: cover;
     height: 90%;
     aspect-ratio: 1 / 1;
+}
 
+.miss-player {
+    background: url(../assets/images/miss_Player_Schiffskrieg.svg);
+}
+
+.hit-player {
+    background: url(../assets/images/hit_Player_Schiffskrieg.svg);
 }
 
 #alert {
@@ -34,12 +44,26 @@
     border-radius: 10%;
 }
 
+.bg-coord-player {
+    background-color: var(--player-coord-color-dark);
+}
+
 .coord-player {
     border: 1px solid var(--player-coord-color-light);
-    background-color: var(--player-coord-color-dark);
+}
+
+.coord-player-miss {
+    border: 1px solid var(--player-coord-color-light);
+}
+
+.bg-coord-foe {
+    background-color: var(--foe-coord-color-dark);
 }
 
 .coord-foe {
     border: 1px solid var(--foe-coord-color-light);
-    background-color: var(--foe-coord-color-dark);
+}
+
+.coord-foe-miss {
+    background-color: var(--foe-coord-color-miss);
 }

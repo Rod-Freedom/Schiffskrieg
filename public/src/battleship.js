@@ -8,6 +8,7 @@ import Shot from './shot.js';
 const socket = io();
 const main = document.querySelector('main');
 const lobby = document.querySelector('#lobby-screen');
+const header = document.querySelector('header');
 const shipyard = document.querySelector('#shipyard');
 const alertEl = document.querySelector('#alert');
 const slotOne = document.querySelector('#slot-1');
@@ -37,14 +38,14 @@ const playerCoordsHover = (confirm) => {
     if (confirm) {
         playerCoordEls.forEach((coord) => {
             if (coord.dataset.state === 'free') {
-                coord.addEventListener('mouseenter', switchCoordFunc);
-                coord.addEventListener('mouseleave', switchCoordFunc);
+                coord.addEventListener('mouseenter', switchPlayerCoordFunc);
+                coord.addEventListener('mouseleave', switchPlayerCoordFunc);
             }
         });
     } else {
         playerCoordEls.forEach((coord) => {
-            coord.removeEventListener('mouseenter', switchCoordFunc);
-            coord.removeEventListener('mouseleave', switchCoordFunc);
+            coord.removeEventListener('mouseenter', switchPlayerCoordFunc);
+            coord.removeEventListener('mouseleave', switchPlayerCoordFunc);
         });
     }
 };
@@ -53,20 +54,30 @@ const foeCoordsHover = (confirm) => {
     if (confirm) {
         foeCoordEls.forEach((coord) => {
             if (coord.dataset.intel === 'unknown') {
-                coord.addEventListener('mouseenter', switchCoordFunc);
-                coord.addEventListener('mouseleave', switchCoordFunc);
+                coord.addEventListener('mouseenter', switchFoeCoordFunc);
+                coord.addEventListener('mouseleave', switchFoeCoordFunc);
                 coord.addEventListener('click', sendShot);
             }
         });
     } else {
         foeCoordEls.forEach((coord) => {
-            coord.removeEventListener('mouseenter', switchCoordFunc);
-            coord.removeEventListener('mouseleave', switchCoordFunc);
+            coord.removeEventListener('mouseenter', switchFoeCoordFunc);
+            coord.removeEventListener('mouseleave', switchFoeCoordFunc);
         });
     }
 };
 
-const switchCoordFunc = (event) => {
+const switchFoeCoordFunc = (event) => {
+    const e = event.target;
+    const type = event.type;
+
+    if(e.dataset.intel === 'unknown') {
+        if (type === 'mouseenter') e.style.opacity = .7
+        if (type === 'mouseleave') e.style.opacity = .3
+    }
+};
+
+const switchPlayerCoordFunc = (event) => {
     const e = event.target;
     const type = event.type;
 
@@ -365,12 +376,12 @@ const selectShip = (event) => {
 const sendShot = (event) => {
     const e = event.target;
     const selectedCoord = e.dataset.coor;
-    e.removeEventListener('click', sendShot);
-    e.dataset.intel = 'pending';
-
-
+    
+    
     if (isTurn === true) {
         socket.emit('take-shot', selectedCoord, playerNum);
+        e.removeEventListener('click', sendShot);
+        e.dataset.intel = 'pending';
     }
 };
 
@@ -390,6 +401,7 @@ const initGame = () => {
 
 const initBoard = () => {
     const newPlayerBoard = new Player(playerBoardObj);
+    header.classList.remove('opacity-0')
     playerBoard = newPlayerBoard.boardEl;
 
     main.appendChild(playerBoard);
@@ -433,18 +445,34 @@ socket.on('init-game', () => {
 
 socket.on('your-shot', shot => {
     const shotCoord = document.querySelector('[data-intel="pending"]');
+    const shotEl = document.createElement('div');
+    shotCoord.appendChild(shotEl);
 
-    if (!shot.hit) {
+    const missFunc = () => {
+        shotEl.classList.add('shot-div', 'miss-player', 'absolute');
         isTurn = false;
         shotCoord.dataset.intel = 'miss';
-    } else {
+        shotCoord.style.opacity = '1';
+        shotCoord.classList.add('bg-coord-foe');
+        shotCoord.classList.add('coord-foe-miss');
+    };
 
-    }
+    const hitFunc = () => {
+        main.style.transform = 'translateX(20px) translateY(-5px) scale(.98)';
+        setTimeout(() => main.style.transform = 'translateX(-15px) translateY(3px) scale(1.02)', 50);
+        setTimeout(() => main.style.transform = 'translateX(10px) translateY(-3px) scale(.99)', 100);
+        setTimeout(() => main.style.transform = 'translateX(-5px) translateY(1px) scale(1.01)', 150);
+        setTimeout(() => main.style.removeProperty('transform'), 400);
+        
+        shotEl.classList.add('shot-div', 'hit-player', 'absolute');
+        shotCoord.dataset.intel = 'hit';
+        shotCoord.style.opacity = '1';
+    };
 
-    console.log(isTurn, 'your')
+    if (!shot.hit) missFunc()
+    else hitFunc()
 });
 
 socket.on('foe-shot', shot => {
     if (!shot.hit) isTurn = true;
-    console.log(isTurn, 'foe')
 });

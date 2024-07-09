@@ -6,7 +6,7 @@
         <link rel="shortcut icon" href="/assets/images/Schiffskrieg-Logo.svg" type="image/x-icon">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="/css/output.css">
         <link rel="stylesheet" href="/css/root.css">
         <link rel="stylesheet" href="/css/game.css">
@@ -17,7 +17,13 @@
         <title>Schiffskrieg | Welcome to the Battle Ground</title>
     </head>
 
-    <body class="h-screen w-screen bg-teal-950/50 flex justify-around items-center relative">
+    <body class="h-screen w-screen bg-teal-950/50 flex flex-col justify-between items-center relative">
+        <header class="flex justify-start items-center h-1/6 w-full text-4xl px-16 border-b border-teal-200 opacity-0">
+            <h3 id="game-title" class="font-brand w-full text-7xl text-teal-200">Schiffskrieg</h3>
+        </header>
+
+        <div></div>
+
         <div id="lobby-screen" class="flex flex-col justify-center items-center absolute h-screen w-screen">
             <div id="bg-filter" class="h-full w-full absolute z-40 bg-black/20 animate-pulse"></div>
             <div id="logo-div" class="flex justify-center items-center relative pb-16">
@@ -26,10 +32,8 @@
             </div>
             <h1 class="font-content text-teal-200 uppercase text-4xl">Waiting for someone to join...</h1>
         </div>
-        <div data-coor="G2" data-state="free" class="flex justify-center items-center coord coord-player relative" style="opacity: 0.3;">
-            <div class="miss absolute"></div>
-        </div>
-        <main class="flex flex-row p-6 h-screen w-screen justify-center items-center relative">
+
+        <main class="flex flex-row p-6 h-5/6 w-screen justify-center items-center relative">
             <section id="shipyard" class="relative">
                 <div id="slot-1" class="slot justify-between"></div>
                 <div id="slot-2" class="slot"></div>
