@@ -156,7 +156,7 @@ router.get('/profile', withAuth, async (req, res) => {
       raw: true
     });
 
-    const avgHitsPerMatch = matchesPlayed > 0 ? hitsPerMatch[0].hits_per_match / matchesPlayed : 0;
+    const avgHitsPerMatch = matchesPlayed > 0 ? Math.round(hitsPerMatch[0].hits_per_match / matchesPlayed * 10) / 10 : 0;
 
     const missPerMatch = await Shot.findAll({
       attributes: [
@@ -181,7 +181,7 @@ router.get('/profile', withAuth, async (req, res) => {
       raw: true
     });
 
-    const avgFailuresPerMatch = matchesPlayed > 0 ? missPerMatch[0].miss_per_match / matchesPlayed : 0;
+    const avgFailuresPerMatch = matchesPlayed > 0 ?  Math.round(missPerMatch[0].miss_per_match / matchesPlayed * 10) / 10 : 0;
 
 
     // Retrieve all matches
@@ -227,7 +227,7 @@ router.get('/profile', withAuth, async (req, res) => {
     };
 
 
-    const avgFailuresBeforeFirstHit = matchesWithHits > 0 ? totalMisses / matchesWithHits : 0;
+    const avgFailuresBeforeFirstHit = matchesWithHits > 0 ? Math.round(totalMisses / matchesWithHits * 10) / 10 : 0;
 
     res.render('profile.handlebars', {
       playerInfo,
