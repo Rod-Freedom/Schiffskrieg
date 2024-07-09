@@ -47,22 +47,18 @@ User story:
 
 ## Resources
 * For Node:
-    * `fs` methods.
-      * `fs.writeFile` to create the SVG.
-      * `fs.existsSync` to look for folders.
-      * `fs.mkdirSync` to create folders.
-    * `import from` as modules.
-    * `"type": "module"` for exports.
-    * `export default` for classes.
-    * `export` for functions.
-    * `process.stdout` methods to manipulate the console.
+    * `require()` as node modules.
+    * `module.exports` for functions.
 * `npm` packages:
-    * Inquirer for prompting.
-    * Chalk for logs' format.
-    * Chalk Animation to animate text in the terminal.
-    * Nanospinner for waiting.
+    * Express for servers.
+    * Express Handlebars for views.
+    * Sequelize for DB's queries.
     * Jest for testing.
       * `describe()` and `it()` thoroughly applied for organized testing.
+* Socket.io
+    * `socket.emit()`.
+    * `socket.on()`.
+    * `socket.broadcast.emit()`.
 * For JavaScript
     * Promises.
     * Object and array destructuring.
@@ -70,6 +66,11 @@ User story:
     * Classes and constructors.
     * `throw new Error` to stop faulty executions.
     * `setTimeout` executions for UX.
+    * `try` and 'catch`.
+    * `async` and `await`.
+    * `import from` as modules.
+    * `"type": "module"` for exports.
+    * `export default` for classes.
 
 <br>
 
@@ -90,7 +91,14 @@ In the first page you just need to click on "Play", When the button with the use
 [(Back to the Top)](#about-the-project)
 
 ## Demos
+Place your ships!
+> ![demo placing ships](./repo_assets/Demo_placing_ships.png)
 
+Attack your enemy!
+>![attacking your enemy](./repo_assets/Demo_shooting.GIF)
+
+Check your records!
+>![user profile](./repo_assets/Demo_profile.png)
 
 <br>
 
@@ -112,7 +120,7 @@ If you have suggestions or want to help with some improvements, you can write me
 [(Back to the Top)](#about-the-project)
 
 ## Credits
-All the code was created from scratch by [Rod's Freedom](https://github.com/Rod-Freedom), Dave + GH url, and [Eynar](https://github.com/yordanop)
+All the code was created from scratch by [Rod's Freedom](https://github.com/Rod-Freedom), [David Miranda](https://github.com/dvdfml), and [Eynar](https://github.com/yordanop)
 <br>
 
 [(Back to the Top)](#about-the-project)

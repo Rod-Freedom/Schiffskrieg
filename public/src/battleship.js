@@ -32,6 +32,7 @@ let foeCoordEls;
 let mouseX;
 let mouseY;
 let playerNum;
+let matched = false;
 let isTurn = false;
 
 const playerCoordsHover = (confirm) => {
@@ -401,10 +402,12 @@ const initGame = () => {
 
 const initBoard = () => {
     const newPlayerBoard = new Player(playerBoardObj);
-    header.classList.remove('opacity-0')
+    header.classList.remove('opacity-0');
     playerBoard = newPlayerBoard.boardEl;
 
     main.appendChild(playerBoard);
+    main.classList.add('justify-around');
+    main.classList.remove('justify-center');
 
     playerCoordEls = document.querySelectorAll('.coord-player');
     ships = document.querySelectorAll('.ship-div');
@@ -420,6 +423,7 @@ socket.on('player-number', number => {
     playerNum = number;
     if (number === 2) {
         document.body.removeChild(lobby);
+        matched = true;
         initBoard();
     }
 })
@@ -431,12 +435,13 @@ socket.on('full-server', () => {
 socket.on('player-connection', number => {
     if (number === 2) {
         document.body.removeChild(lobby);
+        matched = true;
         initBoard();
     }
 })
 
 socket.on('init-game', () => {
-    initGame();
+    if (matched) initGame();
 
     if (playerNum === 1) {
         isTurn = true;

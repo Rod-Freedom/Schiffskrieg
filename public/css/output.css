@@ -701,6 +701,10 @@ video {
   justify-content: space-between;
 }
 
+.justify-around {
+  justify-content: space-around;
+}
+
 .self-center {
   align-self: center;
 }
@@ -919,11 +923,6 @@ video {
 
 .leading-none {
   line-height: 1;
-}
-
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
 .text-teal-100 {
